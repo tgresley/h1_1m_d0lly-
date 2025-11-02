@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fire GIF Wall — Smiley Spawner</title>
+<style>
+  html,body{height:100%;margin:0;overflow:hidden;background:#fff;}
+  #stage{position:relative;width:100vw;height:100vh;}
+
+  /* === FIREWORK GIFS === */
+  .gif{
+    position:absolute;
+    object-fit:contain;
+    display:block;
+    pointer-events:none;
+  }
+  .gif--1  { top:5%;  left:5%;  width:25vw; }
+  .gif--2  { top:15%; left:35%; width:8vw;  }
+  .gif--3  { top:10%; right:6%; width:22vw; }
+  .gif--4  { top:90%; left:8%;  width:34vw; }
+  .gif--5  { top:50%; left:35%; width:24vw; }
+  .gif--6  { top:45%; right:5%; width:28vw; }
+  .gif--7  { bottom:10%; left:10%; width:12vw; }
+  .gif--8  { bottom:6%;  left:38%; width:30vw; }
+  .gif--9  { bottom:12%; right:6%; width:26vw; }
+  .gif--10 { top:30%; left:70%; width:20vw; }
+
+  /* === SMILEYS === */
+  .smiley{
+    position:absolute;
+    width:80px;height:80px;
+    transform:translate(-50%,-50%);
+    cursor:pointer;
+    border:0;background:transparent;padding:0;
+    z-index:10;
+  }
+  .smiley img{width:100%;height:100%;display:block;}
+
+  /* === CENTER LINK === */
+  #go{
+    position:fixed;left:50%;top:50%;
+    transform:translate(-50%,-50%) scale(.96);
+    font:600 18px/1 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:#0047ff;text-decoration:underline;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s, transform .3s;
+    z-index:99;
+  }
+  #go.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1.02);}
+
+  #go2{
+    position:fixed;left:10%;top:50%;
+    transform:translate(-50%,-50%) scale(.96);
+    font:600 18px/1 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:#0047ff;text-decoration:underline;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s, transform .3s;
+    z-index:99;
+  }
+  #go2.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1.02);}
+</style>
+</head>
+<body>
+  <div id="stage">
+    <!-- firework background -->
+    <img class="gif gif--1"  src="./MYGIFS/a firework.gif">
+    <img class="gif gif--2"  src="./MYGIFS/DFIREWORK.gif">
+    <img class="gif gif--3"  src="./MYGIFS/efirework.gif">
+    <img class="gif gif--4"  src="./MYGIFS/a firework.gif">
+    <img class="gif gif--5"  src="./MYGIFS/DFIREWORK.gif">
+    <img class="gif gif--6"  src="./MYGIFS/efirework.gif">
+    <img class="gif gif--7"  src="./MYGIFS/a firework.gif">
+    <img class="gif gif--8"  src="./MYGIFS/DFIREWORK.gif">
+    <img class="gif gif--9"  src="./MYGIFS/efirework.gif">
+    <img class="gif gif--10" src="./MYGIFS/a firework.gif">
+
+    <!-- initial smiley -->
+    <button class="smiley" id="seed" style="left:50%;top:50%;">
+      <img src="/favicons/kissing.gif" alt="smiley">
+    </button>
+  </div>
+
+  <!-- central link -->
+  <a id="go" href="/homepage.html">❀´▽`❀</a>
+  <a id="go2" href="/PAGE_9/index.html">(;´༎ຶД༎ຶ`)</a>
+
+
+<script>
+  const stage = document.getElementById('stage');
+  const goLink = document.getElementById('go');
+  const src = '/favicons/kissing.gif';
+  const SIZE = 80, MARGIN = 40, THRESHOLD = 12;
+  let count = 1; // seed smiley already present
+
+  function randomPos(){
+    const r = stage.getBoundingClientRect();
+    const half = SIZE/2;
+    const x = Math.random()*(r.width - 2*(MARGIN+half)) + (MARGIN+half);
+    const y = Math.random()*(r.height- 2*(MARGIN+half)) + (MARGIN+half);
+    return {x,y};
+  }
+
+  function makeSmiley(x,y){
+  const b=document.createElement('button');
+  b.className='smiley';
+  b.style.left=x+'px';
+  b.style.top=y+'px';
+  b.innerHTML=`<img src="${src}" alt="smiley">`;
+  stage.appendChild(b);
+  count++;
+
+  // When threshold reached, show both links
+  if(count >= THRESHOLD){
+    document.getElementById('go').classList.add('show');
+    document.getElementById('go2').classList.add('show');
+  }
+}
+
+  stage.addEventListener('click',e=>{
+    if(!e.target.closest('.smiley'))return;
+    const {x,y}=randomPos();
+    makeSmiley(x,y);
+  });
+</script>
+</body>
+</html>

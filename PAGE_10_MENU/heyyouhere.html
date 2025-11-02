@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Tiny Browser Windows — Full Version</title>
+<style>
+  :root{--bg:#111;--bar:#fff;--txt:#000}
+
+  html,body{
+    height:100%;margin:0;
+    background-color:#000;
+    background-image:url("./photoslidegifs/pondphotos.gif");
+    background-repeat:repeat;
+    background-position:0 0;
+    background-size:40%;
+    font-family:sans-serif;
+  }
+
+  form{position:absolute;top:6px;left:6px}
+  .tinyWindow{
+    position:absolute;
+    background:var(--bg);
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:2px 2px 8px rgba(0,0,0,.6);
+  }
+  .bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--bar);
+    color:var(--txt);
+    font:11px/18px system-ui,sans-serif;
+    padding:0 6px;
+    height:18px;
+  }
+  .bar button{
+    background:none;
+    border:0;
+    cursor:pointer;
+    font-size:12px;
+    padding:0;
+  }
+  .content{
+    background:#000;
+    height:calc(100% - 18px);
+  }
+  .content img,.content audio{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    border:0;
+  }
+</style>
+</head>
+<body>
+<form>
+  <select id="wordMenu">
+    <option disabled selected>thisismyhouse</option>
+    <option>She</option>
+    <option>gets</option>
+    <option>on</option>
+    <option>top</option>
+    <option>of</option>
+    <option>him</option>
+    <option>and</option> <!-- plays audio -->
+    <option>undoes</option>
+    <option>his</option>
+    <option>striped</option>
+    <option>pajamas</option> <!-- goes to another page -->
+  </select>
+</form>
+
+<script>
+/* === IMAGE LINKS === */
+const LINKS = [
+  "https://i.redd.it/houses-face-gets-me-always-v0-g64wu2fnex8e1.jpg?width=480&format=pjpg&auto=webp&s=1e5982991646f70b9ad431ea31d90d1fe1f93175",
+  "https://i.ytimg.com/vi/AU4LAs9Lsgc/hq720.jpg",
+  "https://m.media-amazon.com/images/M/MV5BMjgxYjAwNmMtYTAwZC00YmQxLWJlOTMtMWM0NGJmNDE0YmI2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjXE21VQTCvOMq5EkxU_fTTphnOxWpoC8PSA&s",
+  "https://images06.kaleidescape.com/transformed/covers/450x642s/227/22727061.jpg",
+  "https://fesfas.com/cdn/shop/articles/House_29_1000x.webp?v=1694051831",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Paris_Night.jpg/1280px-Paris_Night.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg/1024px-Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg",
+  "https://img.pastemagazine.com/wp-content/uploads/2022/06/21041045/house-tv-show-main.jpg",
+  "https://www.adgully.com/img/800/64929_house-1.jpg"
+];
+
+/* === SPECIAL FILE PATHS === */
+const AUDIO_URL = "./houseaudio.mp3";   // local mp3 file
+const PAGE_LINK = "./pajamas.html";    // redirect target page
+
+const menu = document.getElementById("wordMenu");
+
+/* === Utility: Extract hostname === */
+function hostname(url){
+  try{ return new URL(url).hostname; } catch { return "media"; }
+}
+
+/* === Create window (image or audio) === */
+function spawnMedia(type, url){
+  const w = Math.random()*180 + 120;
+  const h = Math.random()*140 + 100;
+  const left = Math.random()*(innerWidth - w);
+  const top  = Math.random()*(innerHeight - h - 20);
+
+  const win = document.createElement("div");
+  win.className = "tinyWindow";
+  win.style.cssText = `width:${w}px;height:${h}px;left:${left}px;top:${top}px;`;
+
+  win.innerHTML = `
+    <div class="bar">
+      <span>${hostname(url)}</span>
+      <button class="close">✕</button>
+    </div>
+    <div class="content"></div>
+  `;
+
+  const content = win.querySelector(".content");
+  if(type === "audio"){
+    const audio = document.createElement("audio");
+    audio.src = url;
+    audio.controls = true;
+    audio.autoplay = true;
+    content.appendChild(audio);
+  } else {
+    const img = document.createElement("img");
+    img.src = url;
+    content.appendChild(img);
+  }
+
+  win.querySelector(".close").onclick = () => win.remove();
+  document.body.appendChild(win);
+}
+
+/* === Handle dropdown change === */
+menu.addEventListener("change", e => {
+  const word = e.target.value;
+  const idx = e.target.selectedIndex - 1;
+
+  if(word === "and"){                // play local mp3
+    spawnMedia("audio", AUDIO_URL);
+  }
+  else if(word === "pajamas"){       // open another page
+    window.location.href = PAGE_LINK;
+  }
+  else {                             // spawn image window
+    const url = LINKS[idx % LINKS.length];
+    spawnMedia("image", url);
+  }
+
+  menu.selectedIndex = 0; // reset dropdown
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blinkies Cross — Simple</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: url(/bgtiles/cherries.jpg);
+    background-size: auto;
+    overflow-x: hidden;
+  } 
+
+  :root{
+    --size: 12vw;     /* ← uniform blinkie width (change if you want) */
+    --gap:  1.2vh;   /* spacing between blinkies */
+  }
+
+  /* Three-column grid: center column holds the vertical arm */
+  .cross{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;  /* center column sized by content */
+    row-gap: 0;
+    width: 100%;
+    padding: 6vh 0 10vh;
+    z-index: 1;
+  }
+
+  /* Vertical arm (center column) */
+  .v{
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap);
+  }
+  .v img{ width: var(--size); height: auto; display: block; }
+
+  /* Horizontal arm (full-width row) */
+  .h{
+    grid-column: 1 / -1;     /* span all 3 columns */
+    display: flex;
+    justify-content: center; /* centered row to cross the vertical arm */
+    flex-wrap: wrap;         /* wrap if too many on small screens */
+    gap: calc(var(--gap) * 1.2);
+    padding: 2vh 0;
+      max-width: 84vw;               /* change to taste (e.g., 40vw–70vw) */
+  margin: 0 auto;                /* center it */
+  }
+  .h img{ width: var(--size); height: auto; display: block; }
+
+  /* Make them readable on phones */
+  @media (max-width: 600px){
+    :root{ --size: 18vw; }
+  }
+
+
+ 
+
+ #link1:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+ 
+ #link2:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+
+   #link3:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+ 
+
+   #link4:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+
+  #link5:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+
+   #link6:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+   #link7:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+   #link8:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+
+  #link9:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+
+    #link10:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+
+    #link11:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+
+    #link12:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+
+
+    #link13:hover{
+    cursor: pointer;
+       border: 1px dashed #0000ff; /* bright blue */
+  }
+
+
+  
+</style>
+</head>
+<body>
+
+<main class="cross">
+
+  <!-- ===== Vertical arm: add most images here (long column makes page scroll) ===== -->
+  <div class="v">
+    <img id="link1" src="./blinkies words/ablue.gif" alt="">
+    <img src="./blinkies words/a beac.gif" alt="">
+
+    <img id="cross1" src="./religiongif/cross2.gif" alt="" style="display:none; ">
+
+
+    <img src="./blinkies words/humbert.gif" alt="">
+    <img src="./blinkies words/sensuallytakes.gif" alt="">
+    <img src="./blinkies words/offlolasshoes.gif" alt="">
+
+
+    <img id="link10" src="./blinkies words/hewalks.gif" alt="">
+   <img id="cross11" src="./religiongif/cross11.gif" alt="" style="display:none; ">
+
+    <img src="./blinkies words/tothe.gif" alt="">
+    <img src="./blinkies words/porch.gif" alt="">
+
+      <img id="link2" src="./blinkies words/wherethedevil.gif" alt="">
+      <img id="cross3" src="./religiongif/cross3.gif" alt="" style="display:none; ">
+    
+    <img src="./blinkies words/didshego.gif" alt="">
+
+  </div>
+
+  <!-- ===== Horizontal arm: this row crosses the center ===== -->
+  <div class="h">
+    <img src="./blinkies words/humbert.gif" alt="">
+    <img src="./blinkies words/porch.gif" alt="">
+    <img  src="./blinkies words/wherethedevil.gif" alt="">
+    <img src="./blinkies words/didshego.gif" alt="">
+    <img src="./blinkies words/mosquito.gif" alt="">
+    <img src="./blinkies words/aprofessor.gif" alt="">
+    <img src="./blinkies words/doloresisangry.gif" alt="">
+    <img src="./blinkies words/very uncomfortable.gif" alt="">
+    <img src="./blinkies words/atypewriter.gif" alt="">
+    <img src="./blinkies words/lolitastandsat.gif" alt="">
+    <img src="./blinkies words/hotelroom.gif" alt="">
+    <img src="./blinkies words/onlyadouble.gif" alt="">
+      <img src="./blinkies words/humbert.gif" alt="">
+    <img src="./blinkies words/porch.gif" alt="">
+    <img src="./blinkies words/wherethedevil.gif" alt="">
+    <img src="./blinkies words/didshego.gif" alt="">
+    <img src="./blinkies words/mosquito.gif" alt="">
+    <img src="./blinkies words/aprofessor.gif" alt="">
+    <img src="./blinkies words/doloresisangry.gif" alt="">
+    <img src="./blinkies words/very uncomfortable.gif" alt="">
+    <img src="./blinkies words/atypewriter.gif" alt="">
+  
+    <img src="./blinkies words/scenewithabluefleure.gif" alt="">
+    <img src="./blinkies words/hotelroom.gif" alt="">
+       <img src="./blinkies words/he says.gif" alt="">
+    <img src="./blinkies words/throughsuds.gif" alt="">
+    <img src="./blinkies words/sheflushesthrough.gif" alt="">
+    <img src="./blinkies words/chaneg og .gif" alt="">
+
+  </div>
+
+  <!-- ===== Continue the vertical arm below to keep the page long ===== -->
+  <div class="v">
+        <img  id="link3" src="./blinkies words/chair.gif" alt="">
+<img id="cross4" src="./religiongif/cross4.gif" alt="" style="display:none; ">
+
+    <img src="./blinkies words/trapsfillingthe.gif" alt="">
+    <img src="./blinkies words/mosquito.gif" alt="">
+    <img src="./blinkies words/scenewithabluefleure.gif" alt="">
+    <img src="./blinkies words/train goes and beeps.gif" alt="">
+    <img src="./blinkies words/aprofessor.gif" alt="">
+    <img src="./blinkies words/andolder.gif" alt="">
+    <img src="./blinkies words/doloresisangry.gif" alt="">
+    <img src="./blinkies words/about being sent.gif" alt="">
+    <img src="./blinkies words/to the.gif" alt="">
+    <img src="./blinkies words/shecomes.gif" alt="">
+    <img src="./blinkies words/andhigshim.gif" alt="">
+    <img src="./blinkies words/feels.gif" alt="">
+    <img src="./blinkies words/very uncomfortable.gif" alt="">
+
+    <img id="link4" src="./blinkies words/nakedin the shower.gif" alt="">
+<img id="cross5" src="./religiongif/cross5.gif" alt="" style="display:none;">
+
+
+    <img src="./blinkies words/he says.gif" alt="">
+    <img src="./blinkies words/throughsuds.gif" alt="">
+    <img src="./blinkies words/sheflushesthrough.gif" alt="">
+    <img src="./blinkies words/chaneg og .gif" alt="">
+    <img src="./blinkies words/atypewriter.gif" alt="">
+    <img src="./blinkies words/wires a soft .gif" alt="">
+
+    <img id="link9" src="./blinkies words/musicplays.gif" alt="">
+<img id="cross10" src="./religiongif/cross10.gif" alt="" style="display:none;">
+
+
+    <img src="./blinkies words/lolitastandsat.gif" alt="">
+    <img src="./blinkies words/walktotheir.gif" alt="">
+    <img src="./blinkies words/hotelroom.gif" alt="">
+    <img src="./blinkies words/it is.gif" alt="">
+    <img src="./blinkies words/onlyadouble.gif" alt="">
+    <img src="./blinkies words/bed.gif" alt="">
+    <img src="./blinkies words/lolitaputs.gif" alt="">
+
+     <img id="link11" src="./blinkies words/wherethedevil.gif" alt="">
+      <img id="cross12" src="./religiongif/cross12.gif" alt="" style="display:none; ">
+
+    <img src="./blinkies words/heisuntrollable.gif" alt="">
+    <img src="./blinkies words/andagrreson.gif" alt="">
+    <img src="./blinkies words/iearnedtha.gif" alt="">
+
+    <img id="link5" src="./blinkies words/murderme.gif" alt="">
+    <img id="cross6" src="./religiongif/cross6.gif" alt=""style="display:none;">
+
+
+    <img src="./blinkies words/ed pajamas he.gif" alt="">
+    <img src="./blinkies words/comes out.gif" alt="">
+    <img src="./blinkies words/apprehensively joining .gif" alt="">
+    <img src="./blinkies words/her in the b.gif" alt="">
+
+    <img id="link6" src="./blinkies words/heshot.gif" alt="">
+        <img id="cross7" src="./religiongif/cross7.gif" alt=""style="display:none;">
+
+    <img src="./blinkies words/polar bear.gif" alt="">
+    <img src="./blinkies words/lady-woman.gif" alt="">
+    <img src="./blinkies words/ofthejury.gif" alt="">
+    <img src="./blinkies words/my regret is .gif" alt="">
+    <img src="./blinkies words/that i did not leave.gif" alt="">
+    <img src="./blinkies words/reading.gif" alt="">
+    <img src="./blinkies words/mwhiteblouse.gif" alt="">
+
+
+    <img  id="link7" src="./blinkies words/and.gif" alt="">
+   <img id="cross8" src="./religiongif/cross8.gif" alt=""style="display:none;">
+
+
+    <img src="./blinkies words/school skirt.gif" alt="">
+    <img src="./blinkies words/watchesher.gif" alt="">
+    <img src="./blinkies words/herup.gif" alt="">
+    <img src="./blinkies words/outside.gif" alt="">
+    <img src="./blinkies words/inthebed.gif" alt="">
+    <img src="./blinkies words/she is in.gif" alt="">
+    <img src="./blinkies words/in humberyo pj's.gif" alt="">
+    <img src="./blinkies words/afloorhugging.gif" alt="">
+    <img src="./blinkies words/a dog.gif" alt="">
+
+
+    <img id="link8" src="./blinkies words/by the fate.gif" alt="">
+   <img id="cross9" src="./religiongif/cross9.gif" alt=""style="display:none;">
+
+
+    <img src="./blinkies words/she notices.gif" alt="">
+    <img src="./blinkies words/a sauce set.gif" alt="">
+    <img src="./blinkies words/ngherform.gif" alt="">
+    <img src="./blinkies words/up and down.gif" alt="">
+
+
+    <img id="link12" src="./blinkies words/licking through.gif" alt="">
+  <img id="cross13" src="./religiongif/cross13.gif" alt=""style="display:none;">
+
+
+    <img src="./blinkies words/amagazine.gif" alt="">
+    <img src="./blinkies words/famoustars.gif" alt="">
+    <img src="./blinkies words/looking up at him.gif" alt="">
+    <img src="./blinkies words/sun.gif" alt="">
+  </div>
+
+
+
+
+
+
+</main>
+</body>
+
+<script>
+// Example: one blinkie opens one GIF
+const blink1 = document.getElementById("link1");
+const gif1   = document.getElementById("cross1");
+
+blink1.addEventListener("click", () => {
+  // toggle visibility
+  if (gif1.style.display === "block") {
+    gif1.style.display = "none";
+  } else {
+    gif1.style.display = "block";
+  }
+});
+
+const blink2 = document.getElementById("link2");
+const gif2   = document.getElementById("cross3");
+
+blink2.addEventListener("click", () => {
+  // toggle visibility
+  if (gif2.style.display === "block") {
+    gif2.style.display = "none";
+  } else {
+    gif2.style.display = "block";
+  }
+});
+
+const blink3 = document.getElementById("link3");
+const gif3   = document.getElementById("cross4");
+
+blink3.addEventListener("click", () => {
+  // toggle visibility
+  if (gif3.style.display === "block") {
+    gif3.style.display = "none";
+  } else {
+    gif3.style.display = "block";
+  }
+});
+
+
+const blink4 = document.getElementById("link4");
+const gif4   = document.getElementById("cross5");
+
+blink4.addEventListener("click", () => {
+  // toggle visibility
+  if (gif4.style.display === "block") {
+    gif4.style.display = "none";
+  } else {
+    gif4.style.display = "block";
+  }
+});
+
+
+const blink5 = document.getElementById("link5");
+const gif5   = document.getElementById("cross6");
+
+blink5.addEventListener("click", () => {
+  // toggle visibility
+  if (gif5.style.display === "block") {
+    gif5.style.display = "none";
+  } else {
+    gif5.style.display = "block";
+  }
+});
+
+const blink6 = document.getElementById("link6");
+const gif6   = document.getElementById("cross7");
+
+blink6.addEventListener("click", () => {
+  // toggle visibility
+  if (gif6.style.display === "block") {
+    gif6.style.display = "none";
+  } else {
+    gif6.style.display = "block";
+  }
+});
+
+const blink7 = document.getElementById("link7");
+const gif7  = document.getElementById("cross8");
+
+blink7.addEventListener("click", () => {
+  // toggle visibility
+  if (gif7.style.display === "block") {
+    gif7.style.display = "none";
+  } else {
+    gif7.style.display = "block";
+  }
+});
+
+const blink8 = document.getElementById("link8");
+const gif8  = document.getElementById("cross9");
+
+blink8.addEventListener("click", () => {
+  // toggle visibility
+  if (gif8.style.display === "block") {
+    gif8.style.display = "none";
+  } else {
+    gif8.style.display = "block";
+  }
+});
+
+
+const blink9 = document.getElementById("link9");
+const gif9  = document.getElementById("cross10");
+
+blink9.addEventListener("click", () => {
+  // toggle visibility
+  if (gif9.style.display === "block") {
+    gif9.style.display = "none";
+  } else {
+    gif9.style.display = "block";
+  }
+});
+
+const blink10 = document.getElementById("link10");
+const gif10  = document.getElementById("cross11");
+
+blink10.addEventListener("click", () => {
+  // toggle visibility
+  if (gif10.style.display === "block") {
+    gif10.style.display = "none";
+  } else {
+    gif10.style.display = "block";
+  }
+});
+
+const blink11 = document.getElementById("link11");
+const gif11  = document.getElementById("cross12");
+blink11.addEventListener("click", () => {
+  // toggle visibility
+  if (gif11.style.display === "block") {
+    gif11.style.display = "none";
+  } else {
+    gif11.style.display = "block";
+  }
+});
+
+const blink12 = document.getElementById("link12");
+const gif12  = document.getElementById("cross13");
+
+blink12.addEventListener("click", () => {
+  // toggle visibility
+  if (gif12.style.display === "block") {
+    gif12.style.display = "none";
+  } else {
+    gif12.style.display = "block";
+  }
+});
+
+
+
+
+
+
+</script>
+
+</html>

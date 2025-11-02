@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lolita</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    overflow-x: hidden;
+  background-image: url(./bgtiles/embyellow.jpg);
+    background-image: 10% 10%;
+  
+  }
+  .text {
+    width: 100vw;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 0.9;
+    font-size: 5.5vh;
+  }
+
+  pre {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+        color: #000000;
+  }
+
+  a{
+    color: rgb(8, 0, 255);
+
+  }
+  .reg {
+    transform: rotate(0deg);
+  }
+
+  .reg2 {
+       margin-top: -3rem;
+  }
+
+  .reg3 {
+      line-height: 1;
+  }
+
+  .upsidedown {
+    transform: rotate(181deg);
+  }
+
+  /* ✅ This container will keep both on the same horizontal line */
+  .skewline {
+    display: flex;
+    align-items: right;
+    justify-content: flex-start; /* or flex-start if you prefer left-aligned */
+  
+
+  }
+
+    .skewline3 {
+  
+ transform: rotate(1deg);
+ margin-top: -2rem;
+text-align: right;
+
+    }
+
+
+    .skewline302 {
+  
+ transform: rotate(1deg);
+ margin-top: -2rem;
+text-align: right;
+margin-right: 10%;
+    }
+
+
+
+    .skewline4 {
+  
+ transform: rotate(1.2deg);
+ margin-top: -2rem;
+text-align: right;
+    }
+
+    .skewline5 {
+       transform: rotate(1.1deg);
+margin-top: 4rem;
+    }
+
+    
+    .skewline6 {
+      margin-top: 4rem;
+       transform: rotate(2deg);
+
+    }
+
+    .upsidedown2 {
+    transform: rotate(179deg);
+  }
+
+
+     .upsidedown3 {
+    transform: rotate(181deg);
+    text-align: right;
+  }
+
+   .upsidedown4 {
+    transform: rotate(179deg);
+    text-align: left;
+    margin-top: -3rem;
+  }
+.images {
+    position: relative;
+    width: 100vw;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.imageone {
+  
+    width: 10vw;
+    height: 2%;
+
+}
+
+.imagetwo {
+
+    width: 20%;
+    height: 3%;
+
+}
+
+.imagethree {
+    width: auto;
+    height: 2rem;
+ 
+}
+
+
+.glb {
+   height: 4rem;
+   width: 10vw;
+}
+
+
+
+
+.lf3 {
+    height: 20rem;
+margin-top: -25rem;
+    width: auto;
+}
+
+.bubble {
+    position: absolute;
+    top: 20vh;
+    left: 3vw;
+    width: 15vw;
+    height: auto;
+    z-index: 10;
+}
+
+
+
+.nymphs {
+    height: 2rem;
+    width: 25%;
+}
+
+.gifframe {
+    height: 6rem;
+    width: auto;
+    margin-top: -5rem;
+    
+}
+
+.reg4 {
+      line-height: 1.2;
+      margin-top: -7rem;
+}
+
+.reg5{
+      line-height: 2;
+
+}
+
+
+.skewline7 {
+    margin-top: -6rem;
+    transform: rotate(-1deg);
+    text-align: left;
+}
+
+.skewline8 {
+    margin-top: -10rem;
+    transform: rotate(1deg);
+    text-align: left;
+    line-height: 1;
+}
+
+.skewline9 {
+    position: relative;
+    transform: rotate(1deg);
+    text-align: right;
+    line-height: 1;
+    z-index: 10;
+}
+
+.skewline10 {
+
+    transform: rotate(-1deg);
+    text-align: right;
+   
+}
+
+.reg7{
+  position: absolute;
+      line-height: 1.2;
+margin-top: -8.5rem;
+      background-color: #ffffff;
+    height: 4rem;
+    width: 20%;
+      text-align: left;
+       z-index: 13; 
+}
+
+.reg8{
+      line-height: 1.2;
+    transform: rotate(-0.3deg);
+      text-align: left;
+       z-index: 13;
+     
+}
+
+.skewline11 {
+
+    transform: rotate(1.5deg);
+    text-align: center;
+    line-height: 1;
+margin-top: 4rem;
+    margin-left: 10%;
+    z-index: 10;
+}
+
+.skewline12{
+
+    transform: rotate(2deg);
+    text-align: left;
+    line-height: 1;
+margin-top: -1rem;
+    z-index: 20;
+    background-color: #ffffff;
+    height: 6rem;
+    width: 100vw;
+}
+
+.skewline13{
+margin-top: 8rem;
+    transform: rotate(-2deg);
+    text-align: left;
+    line-height: 1;
+ 
+ 
+}
+
+.reg9{
+  
+     
+}
+
+.reg10{
+
+    
+    transform: rotate(-1deg);
+    text-align: left;
+margin-top: 10rem;
+      z-index: 20;
+    background-color: #ffffff;
+    height: 6rem;
+    width: 100vw;
+}
+
+.reg11{
+
+    transform: rotate(-1.4deg);
+    text-align: right;
+    
+}
+
+
+.skewline14{
+margin-top: 20rem;
+    transform: rotate(1.4deg);
+    text-align: center;
+    line-height: 1;
+}
+
+
+.skewline15{
+margin-top: 12rem;
+    transform: rotate(-4deg);
+    text-align: left;
+    line-height: 1;
+}
+.reg12{
+            /* ensure we have full width to align within */
+  text-align: right;
+  white-space: pre;  
+}
+
+
+
+.concretepoetry1 {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  margin-top: 10rem;
+  display: flex;
+
+}
+
+.concretepoetry2 {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  margin-top: 10rem;
+  display: flex;
+
+}
+
+.icons {
+  position: relative;
+    height: 3.2rem;
+    width: auto;
+    z-index: 80;
+  
+}
+
+.icon2 {
+  position: relative;
+    height: 2rem;
+    width: 3rem;
+}
+
+.icon3 {
+  position: relative;
+    height: 4.5rem;
+    width: auto;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+
+}
+
+.icon4{
+    height: 15rem;
+    width: auto;
+  margin-top: -15rem;
+  margin-left: -3rem;
+  margin-bottom: -2rem;
+}
+
+.icon5{
+  height: 2.2rem;
+  width: 12%;
+
+}
+
+.imjustagirl {
+    height: 5rem;
+    width: 20%;
+    margin-top: -5rem;
+}
+
+.godflowers{
+  height: 3rem;
+  width: 10%;
+}
+
+.icon6{
+  height: 7rem;
+  margin-top: -7rem;
+}
+
+.icon7{
+  height: 3rem;
+  margin-bottom: -2rem ;
+}
+
+.icon8 {
+  height: 9rem;
+  margin-bottom: -2rem;
+}
+
+.icon9 {
+height: 3.2rem;
+margin-top: -3.2rem;
+}
+
+.bow-strip {
+  width: 100%;
+  height: 3rem;
+  background-image: url("./tumblricons/BWHAT.jpg");
+  background-repeat: repeat-x;
+  background-size: 4rem 3rem;           /* image size */
+ 
+}
+
+.popup {
+    position: fixed;
+    top: 10vh;
+   right: 2vw;
+width: 30%;
+height: 15%;
+    font-family: Arial, sans-serif;
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+.popup p {
+    margin: 0;
+    padding: 8px;
+        font-size:3vh;
+        font-weight: 900;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(255, 0, 0);
+    animation: blink 1s infinite;
+        border-radius: 15px;
+    transform: scaleY(1.2);
+    line-height: 1rem;
+    box-shadow: #000 0px 0px 10px;
+    border-bottom: #000 3px solid;
+    border-right: #000 3px solid;
+    animation: digiFlash 1s infinite steps(1, start);
+}
+
+.popup:hover{
+  cursor: url('./cursors/yellowpolka.cur'), auto;
+}
+
+@keyframes digiFlash {
+  0%, 100% { opacity: 1; background-color: #ff0000; }
+  50% { opacity: 0; background-color: #ff0000; }
+}
+
+.popup2 {
+  position: fixed;
+  top: 2vh;
+  left: 2vw;
+  width: 20%;
+  height: 8%;
+  display: flex;                /* center the <p> inside */
+  align-items: center;
+  justify-content: center;
+
+  background-color: #7eecff;
+  border: 1px solid black;
+  border-radius: 2px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+
+  animation: bgBlink 0.2s infinite;
+  will-change: background-color;
+}
+
+.popup2 p {
+  margin: 0;
+  padding: 2px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 7vh;
+  line-height: 1rem;
+
+  animation: textBlink 0.2s infinite ; /* ← add this */
+  will-change: color;
+  text-shadow: 3px 3px  rgba(0,0,0,1);
+}
+
+
+
+
+/* text colour animation */
+@keyframes textBlink {
+  100%   { color: rgb(255, 0, 255); }
+  100% { color: #7eecff; }
+}
+
+/* background colour animation */
+@keyframes bgBlink {
+  100%   { background-color: #7eecff; }
+  100% { background-color: rgb(255, 0, 255); }
+}
+
+.popup3 {
+  position: fixed;
+  top: 40vh;
+  left: 20vw;
+  display: none;
+  z-index: 1000;
+}
+
+.popup3 img {
+  width: 200%;
+}
+
+
+
+.popup4 img {
+ 
+  position: fixed;
+  left: 2%;
+  bottom: 2%;
+  width: 10%;
+  height: auto;
+  z-index: 1000;
+}
+
+
+
+
+@keyframes spinAlert {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+
+
+.popup6 {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 70%;
+  width: 20%;
+  height: 20%;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+}
+
+/* the actual circle shape */
+.circle {
+    display: none;
+  width: 80px;
+  height: 80px;
+  background-color: #fff200;
+  border-radius: 50%;
+  border: #ff0000 solid 2px;
+  display: flex;
+  flex-direction: column;  /* stack texts vertically */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+
+}
+
+/* first text */
+.circle .text1 {
+  font-family: cursive;
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: rgb(7, 7, 194);
+  margin: 0;
+  line-height: 1;
+}
+
+/* second text, different font */
+.circle .text2 {
+  font-family: comic 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: underline;
+  color: red;
+  margin: 0;
+  line-height: 1;
+}
+
+
+
+.popup7 {
+  position: absolute;
+  bottom: 5vh;
+  left: 1vw;
+  width: 11vw;
+  height: 12vw;                 /* makes it square */
+  background-color: #000000;
+  border: 1px solid #000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  transform: scaleY(2) scaleX(0.4);
+}
+
+.AISLUTS {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  font-family: 'Arial Black', Impact, sans-serif;
+}
+
+.text3 {
+  color: #ff007f;   
+font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;    /* hot pink */
+  font-size: 3vh;
+  transform: scaleX(6.2) scaleY(2);
+  margin: 0;
+  line-height: 2;
+}
+
+.text4 {
+  color: #00aaff;       /* bright blue */
+  font-size: 4vh;
+  margin: 0;
+    line-height: 1;
+}
+
+
+/* all popups start hidden */
+[class^="popup"]{
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease;
+}
+.popup--show{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+</style>
+</head>
+<body>
+
+
+<div class="popup"  data-delay="800"  data-copies="1" data-jitter="40">
+  <p>!!CLICK HERE TO CHAT WITH LOCAL DILFS!! </p>
+</div>
+
+<div class="popup2" data-delay="3000" data-copies="2" data-jitter="20">
+  <p>WINNER!!!</p>
+</div>
+
+
+
+<div class="popup4" data-delay="2600" data-copies="2" data-jitter="45">
+  <img src="./popupgifs/spam.gif" alt="">
+</div>
+
+<div class="popup6" data-delay="3200" data-copies="1" data-jitter="10">
+  <div class="circle">
+    <p class="text1">under 18's</p>
+    <p class="text2">ONLY!</p>
+  </div>
+
+  <div class="popup7">
+    <div class="AISLUTS">
+<p class="text3">AI</p>
+<p class="text4">SLUTZ 4 HIRE</p>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+  <div class="text">
+<pre class="reg">      
+"you got a flat mister"  <img  class="imageone" src="./images/LOLITA1.jpg" alt="">  <img class="hi" src="./images/hi.png" alt="">⚤⚤⚤⚤⚤⚤⚤⚤⚤⚤⚤⚤⚤Humbert realises they are being followed
+grabs a <a href="./PAGE_2/landing1.html">white pillow</a>and covers himself in white sheets 
+👙👙👙👙👙👙"get☆☆☆☆☆☆☆out". <img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="imagetwo" src="./gifs/littlegirlsareprecious.gif" alt="">
+s over the ugly <img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png">planes — there was no-one else like me☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻
+ <img  class="imagethree" src="./images/oldstickers.png" alt="">⍝⍝⍝⍝⍝lightning flashes,     blue fever  <a href="/PAGE_8/index.html">fisheye room.</a>    shadows on t
+<img src="./gifs/pond.gif" style="width: 20vw;height: 2rem;">  🌸🌸🌸🌸 <img src="./gifs/CLICKHERE.gif" style="width: 30vw; height: 2.5rem;"> <span style="position: relative; font-size: 4vh;">🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻</span>
+<img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">  <img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">  <img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">  <img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">                                                  
+continues Quilty stumble   <img  class="nymphs" src="./gifs/nymphs.gif"      alt=""> <img  class="nymphs" src="./gifs/nymphs.gif"      style="width: 10%; height: 2.3rem;">Hopefully poignant thing was np h  
+GE RE <img  class="icons" src="icons/flowers.jpg"><img  class="icons" src="icons/flowers.jpg"><img  class="icons" src="icons/flowers.jpg"><img  class="icons" src="icons/flowers.jpg">i <img src="./gifs/scrolldown.gif" style="width: 30%;height: 2rem;">mut be hard for you to undertand my mytificati
+aps hi gun and stares in beads of <a href="./PAGE_5/textfall.html">sweat  ❁❁❁❁❁❁❁ </a>lo in the passenger
+     his house      she throws his notebooke out the wuindow- he <img class="gifframe"src="./gifs/frameowman.gif" > <img class="gifframe"src="./gifs/frameowman.gif" > <img class="gifframe"src="./gifs/frameowman.gif" > <img class="gifframe"src="./gifs/frameowman.gif" > <img class="gifframe"src="./gifs/frameowman.gif" >
+<img src="./images/your daddy kink isnt fashion .jpg" style="height: 3rem; width: 20%;"><img src="./images/your daddy kink isnt fashion .jpg" style="height: 3rem; width: 20%;"> <img src="./images/unnamed (1).jpg" style="height: 3rem; width: 60%; align-items: center; margin-top: 1rem;">
+practically naked, <img  class="lf3" src="./gifs/lolitafashion3.gif"      alt="">💎💎💎💎💎dick swinging -            he is shot blood spurt wl 
+</pre>
+
+
+<div class="skewline">
+  <pre class="upsidedown"> ❃❃❃❃❃❃❃❃❃❃❃ <a href="/PAGE_4/cross.html">Lolita</a> sits and sings as Humbert freaks</pre>
+
+  <pre class="reg">         Humbert runs the</pre>
+</div>
+
+
+<div class="skewline2" style="margin-top: 3rem;">
+ <pre class="upsidedown2">She greets the door with glasses and a 💒 💒 💒 💒 💒 💒 <img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp"><img  class="icons" src="./icons/box.webp">
+</pre>
+
+  <pre class="reg" style="margin-top: -7rem;">he is maddened </pre>
+</div>
+
+<pre class="reg">
+
+            the white sand dessert  🃑 🃑 🃑 🃑   thr ee   year  <img  class="icon4" src="./icons/sexygirl.png">  s later<img  class="icon4" src="./icons/sexygirl.png"><img  class="icon4" src="./icons/sexygirl.png"><img  class="icon4" src="./icons/sexygirl.png">
+'t come out of an  <img src="./gifs/bubblegum3.gif" style="width: 15%; height: 6rem; margin-bottom: -4rem;">             apple tree, dont come close to meeeee         
+s planned locations and areas to be at certain times. <img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png">
+
+    <a href="./PAGE_3/index.html">bed"</a>
+</pre>
+
+<pre class="reg2">
+  
+            Closeup on lolitas red lip and face<img class="imjustagirl" src="./gifs/imjustagirl.gif"> <img class="imjustagirl" src="./gifs/imjustagirl.gif"> A
+e than anythi  </pre>
+<pre class="skewline3"><a href="/PAGE_6/desktop.html">MCS SCHOOL ADD KNOWLEDGE, RESPECT</a></pre>
+
+
+
+
+
+<pre class="reg">
+💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮💮
+ipstick, flushed in bed    -  the record <pre class="skewline302"><img class="icons" src="./icons/vintagecircle.png"><img class="icons" src="./icons/vintagecircle.png"><img class="icons" src="./icons/vintagecircle.png"><img class="icons" src="./icons/vintagecircle.png"><img class="icons" src="./icons/vintagecircle.png">is at its end spinning</pre>
+<pre class="skewline4"> <img src="./gifs/flowersrock.gif" style="width: 40%;height:2rem">                                                      Molly
+</pre> <img class="godflowers" src="./gifs/godflowers.gif">. <img class="godflowers" src="./gifs/godflowers.gif">. <img class="godflowers" src="./gifs/godflowers.gif">. <img class="godflowers" src="./gifs/godflowers.gif">. <img class="godflowers" src="./gifs/godflowers.gif">. <img class="godflowers" src="./gifs/godflowers.gif">. <img class="godflowers" src="./gifs/godflowers.gif">. <img class="godflowers" src="./gifs/godflowers.gif">. <img class="godflowers" src="./gifs/godflowers.gif">. <img class="godflowers" src="./gifs/godflowers.gif">
+angs out of the    window full cheeks through the wet forest roa
+vas clever our pursuer, he k. <img  style=" width: 30%; height: 5rem; margin-bottom: -4rem;"src="./gifs/photoslides.gif" >   ept chasing cars - as real as
+   behind them <img class="icons" src="./icons/damaskfolder.png"><img class="icons" src="./icons/damaskfolder.png" >                                                                 <img class="icons" src="./icons/tits.png"><img class="icons" src="./icons/tits.png"><img class="icons" src="./icons/tits.png"><img class="icons" src="./icons/tits.png">
+e sings      in the car as Humbert is in the shop - lolita smiles and<pre style="font-size: 11vh;"><a href="/PAGE_7/index8.html">🀥🀥</a>🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥</pre>
+ver really crazy abouut” <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">humbert sobs and is b
+I knew         long ago - she coul.            d fade and wither, I could sto go n ✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬
+o             Aw	LAKE point cottage.         s - lo is in bed Humbert offers to ✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬
+inst the <img src="./gifs/teen.gif" style="width: 40%; height: 2rem;">         <img src="./images/BWLOLITA.jpeg" style="width: 40%; height: 2.4rem;">
+  <img class="icon5" src="./icons/orangeflower.jpg"> <img class="icons" src="./icons/glasses.png"> <img class="icons" src="./icons/glasses.png">   <a href="/PAGE_9/endpage.html">Say goodbye</a>  Molly say goodbye to <img src="./gifs/makemoney.gif" style="height: 4rem; width: 25%;">
+           <img src="./icons/lady3d.png" style="height: 9rem; margin-top: -8rem; z-index: 100;">       He drives through cow fields cow  b  <img style="width: 20%; height: 6rem; margin-bottom: -4rem;" src="./icons/Folder-Heart-icon.png" >
+</pre>
+
+<pre class="reg">
+e questions hi, bare legs he chews a snack ⍰.   ⍰.   ⍰.   ⍰.   ⍰.   ⍰. 
+<img class="icon5" style= "width: 40%" src="./gifs/vamp.gif" alt="">	<img class="icons" src="icons/purplepixelflower.png" alt="">  <img class="icons" src="icons/purplepixelflower.png" alt="">	<img class="icons" src="icons/purplepixelflower.png" alt="">  <img class="icons" src="icons/purplepixelflower.png" alt=""> behind a blue m 🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡🂡
+☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎☎︎
+    s as she walks back ad undresses              “Lolita.” He looks down - 
+<img class="icon6" src="./icons/girl-2-icon.png" alt=""><img class="icon6" src="./icons/girl-2-icon.png" alt=""><img class="icon6" src="./icons/girl-2-icon.png" alt=""><img style=" width: 30%; height: 8vh;"src="./gifs/boopbw.gif" alt="">☨☨☨☨ ontrolled fires consume th
+✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡✌︎♡
+</pre>
+
+<div class="skewline5">
+<pre class="upsidedown3">
+  <img class="icon2" src="./tumblricons/pinkflwoer.png" alt="">  <img class="icon2" src="./tumblricons/pinkflwoer.png" alt="">   <img class="icon2" src="./tumblricons/pinkflwoer.png" alt="">   <img class="icon2" src="./tumblricons/pinkflwoer.png" alt="">  with tenderness over the mere  </pre> 
+  <pre class="upsidedown4"> sonified and mysterious- <img class="icon7" src="./icons/compact.png" alt=""><img class="icon7" src="./icons/compact.png" alt=""><img class="icon7" src="./icons/compact.png" alt=""><img class="icon7" src="./icons/compact.png" alt=""><img class="icon7" src="./icons/compact.png" alt=""><img class="icon7" src="./icons/compact.png" alt=""><img class="icon7" src="./icons/compact.png" alt=""><img class="icon7" src="./icons/compact.png" alt="">
+</pre>
+
+</div>
+
+
+<pre class="reg3">
+rooms of varnished wood - <a href="/PAGE_10_MENU/starting.html">police behind him </a>    <img src="./tumblricons/vintagebathers.jpg" style="height: 5rem; width: 12%;   margin-top: -5rem;"> <img src="./tumblricons/undieslace.png" style="height: 7rem; width: 12%; margin-top: -7rem;"> <img src="./tumblricons/vintagebathers.jpg" style="height: 5rem; width: 12%;   margin-top: -5rem;"><div class="bow-strip"></div>
+m a nightmare flashing lights and <a href="/PAGE_8/index.html">distorted reflection </a> s Hum     <img src="./gifs/boop.gif" style="height: 10rem;margin-top: -10rem;">
+<img class="icons" src="./gifs/icons.gif" alt=""><img class="icons" src="./gifs/icons.gif" alt=""><img class="icons" src="./gifs/icons.gif" alt=""><img class="icons" src="./gifs/icons.gif" alt=""> FOGGY HILDD, Humbert covered in blood cree <img src="./gifs/makeup.gif" style=" height: 4rem; width: 30%; margin-top: -4rem;">
+<img src="./icons/womanfolder.png">    <img src="./icons/womanfolder.png">   <img src="./icons/womanfolder.png">    <img src="./icons/womanfolder.png">    <img src="./icons/womanfolder.png">     <img src="./icons/womanfolder.png">        <img src="./gifs/joanetta.gif" class="icon8"> <img src="./gifs/joanetta.gif" class="icon8"> <img src="./gifs/joanetta.gif" class="icon8"> <img src="./gifs/joanetta.gif" class="icon8"> <img src="./gifs/joanetta.gif" class="icon8"> <img src="./gifs/joanetta.gif" class="icon8">
+ves oodbyre, he is destroyed - seeing the young girl in her s <img src="./gifs/bouelegs.gif" alt=""><img src="./gifs/bouelegs.gif" alt=""><img src="./gifs/bouelegs.gif" alt=""><img src="./gifs/bouelegs.gif" alt=""><img src="./gifs/bouelegs.gif" alt=""><img src="./gifs/bouelegs.gif" alt=""><img src="./gifs/bouelegs.gif" alt="">
+</pre>
+
+
+  
+
+
+
+</body>
+<script>
+(function(){
+  const clamp = (v,min,max)=>Math.min(Math.max(v,min),max);
+  const rand  = (min,max)=>Math.random()*(max-min)+min;
+
+  const popups = Array.from(document.querySelectorAll('[class^="popup"]'));
+
+  popups.forEach(el => {
+    const delay  = +el.dataset.delay  || 0;
+    const copies = +el.dataset.copies || 0;
+    const jitter = +el.dataset.jitter || 20;
+
+    // Hide them initially
+    el.style.opacity = 0;
+    el.style.pointerEvents = "none";
+    el.style.transition = "opacity 0.4s ease";
+
+    setTimeout(() => {
+      // Reveal the original popup
+      el.style.opacity = 1;
+      el.style.pointerEvents = "auto";
+
+      // Duplicate it a few times in slightly different positions
+      for (let i=0; i<copies; i++){
+        const clone = el.cloneNode(true);
+        clone.style.opacity = 1;
+        clone.style.pointerEvents = "none";
+        clone.style.position = "fixed";
+        clone.style.transition = "none";
+        clone.style.zIndex = (parseInt(getComputedStyle(el).zIndex)||1000) + i + 1;
+
+        // Base position
+        const rect = el.getBoundingClientRect();
+        const top  = clamp(rect.top  + rand(-jitter, jitter), 0, window.innerHeight - rect.height);
+        const left = clamp(rect.left + rand(-jitter, jitter), 0, window.innerWidth  - rect.width);
+
+        clone.style.top  = `${top}px`;
+        clone.style.left = `${left}px`;
+
+        document.body.appendChild(clone);
+      }
+    }, delay);
+  });
+})();
+</script>
+
+
+</html>

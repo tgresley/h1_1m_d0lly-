@@ -1,0 +1,51 @@
+﻿[Arrow]
+Path=Eye Normal Select.ani
+
+[UpArrow]
+Path=Eye Alternate Select.ani
+
+[Wait]
+Path=Eye Busy.ani
+
+[SizeNWSE]
+Path=Eye Diagonal 1.cur
+
+[NWPen]
+Path=Eye Handwriting.cur
+
+[Help]
+Path=Eye Help.ani
+
+[SizeWE]
+Path=Eye Horizontal.cur
+
+[Hand]
+Path=Eye Link.ani
+
+[Pin]
+Path=Eye Location.ani
+
+[SizeAll]
+Path=Eye Move.cur
+
+[Person]
+Path=Eye Person.ani
+
+[Crosshair]
+Path=Eye Precision.cur
+
+[IBeam]
+Path=Eye Text.cur
+
+[No]
+Path=Eye Unavailable.ani
+
+[SizeNESW]
+Path=Eye Diagonal 2.cur
+
+[SizeNS]
+Path=Eye Vertical.cur
+
+[AppStarting]
+Path=Eye Working.ani
+

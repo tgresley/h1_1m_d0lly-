@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lolita</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  html { scroll-behavior: auto; } /* custom smooth scrolling below */
+  body { overflow-x: hidden; color: #fff; }
+
+  /* --- Tiled background layers (no scaling) --- */
+  .bg-layer{
+    position: fixed; inset: 0;
+    background-repeat: repeat;
+    background-position: 50% 50%;
+    opacity: 0; pointer-events: none; z-index: 0;
+  }
+  .bg-layer.on { opacity: 1; }
+
+  .fade-drift { animation: fadeDrift 120ms ease both; }
+  @keyframes fadeDrift{
+    0%   { opacity: 0;   background-position: 50% 50%; }
+    100% { opacity: 1;   background-position: 44% 46%; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .fade-drift { animation: none; opacity: 1 !important; }
+  }
+
+  /* Content layer */
+  .page{
+    position: relative; min-height: 2500vh; width: 100%; z-index: 1;
+  }
+  pre{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 2vh; color: #fff; white-space: pre-wrap; margin: 0;
+  }
+  a{ text-decoration: underline; }
+
+  /* ===== Positions ===== */
+  .lineone   { position:absolute; top:  20vh; left:15vw; }
+  .linetwo   { position:absolute; top: 460vh; left:70vw; }
+  .linethree { position:absolute; top: 830vh; left:25vw; }
+  .linefour  { position:absolute; top:1320vh; left:75vw; }
+  .linefive  { position:absolute; top:1600vh; left:18vw; }
+  .linesix   { position:absolute; top:2080vh; left:60vw; max-width:80vw; }
+
+  /* ===== Your original link hover effects (preserved) ===== */
+  .lineone   a:hover { color: aqua;            background-color: blue; }
+  .linetwo   a:hover { color: rgb(255, 0, 0);  background-color: rgb(194, 255, 96); }
+  .linethree a:hover { color: rgb(255, 0, 242);background-color: rgb(0, 0, 0); }
+  .linefour  a:hover { color: rgb(242, 255, 0);background-color: rgb(255, 0, 0); }
+  .linefive  a:hover { color: rgb(255, 86, 8); background-color: rgb(255, 255, 255); }
+  .linesix   a:hover { color: rgb(228, 250, 156); background-color: rgb(61, 146, 42); }
+
+  /* Optional focus-visible parity */
+  .lineone   a:focus-visible { outline: none; color: aqua; background: blue; }
+  .linetwo   a:focus-visible { outline: none; color: #f00; background: #c2ff60; }
+  .linethree a:focus-visible { outline: none; color: #ff00f2; background:#000; }
+  .linefour  a:focus-visible { outline: none; color:#f2ff00; background:#f00; }
+  .linefive  a:focus-visible { outline: none; color:#ff5608; background:#fff; }
+  .linesix   a:focus-visible { outline: none; color:#e4fa9c; background:#3d922a; }
+
+  /* ===== End links (hidden until reveal) ===== */
+  .finallink{
+    position: fixed; top: 2vh; right: 2vw;
+    color:#111; font-size: 2vh; display:none; z-index:2;
+  }
+
+
+  /* Lucky popup (animated when shown) */
+  .imfeelinglucky{
+    position: fixed; bottom: 5vh; right: 2vw; display:none; z-index: 2;
+  }
+  .imfeelinglucky a{
+    display:inline-block; padding: 4px 8px;
+    font-size: 2vh; line-height: 1;
+    color:#7eecff; background:#00ff00;
+    border: 1px solidrgb(0, 0, 0)2; border-radius: 3px;
+    animation:
+      textBlink .24s steps(1, end) infinite,
+      bgBlink   .24s steps(1, end) infinite;
+    will-change: color, background-color, transform;
+
+  }
+  @keyframes textBlink{
+    0% { color:#0008ff; } 50% { color:#ffffff; } 100% { color:#0800ff; }
+  }
+  @keyframes bgBlink{
+    0% { background:#ffffff; } 50% { background:#0d00ff; } 100% { background:#ffffff; }
+  }
+ 
+  @media (prefers-reduced-motion: reduce){
+    .imfeelinglucky a{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background layers -->
+<div id="bgA" class="bg-layer on"  style="background-image:url('/bgtiles/boat.gif');"></div>
+<div id="bgB" class="bg-layer"      style="background-image:url('');"></div>
+
+<div class="page">
+  <pre class="lineone" id="p1">
+    <a href="#" class="jump" data-next="#p2" data-bg="/bgtiles/littlegirl.gif">speaks</a>
+  </pre>
+
+  <pre class="linetwo" id="p2">
+    <a href="#" class="jump" data-next="#p3" data-bg="/bgtiles/man.gif">-4’10 in one socks</a>
+  </pre>
+
+  <pre class="linethree" id="p3">
+    <a href="#" class="jump" data-next="#p4" data-bg="/bgtiles/locker.gif">lola in slacks,</a>
+  </pre>
+
+  <pre class="linefour" id="p4">
+    <a href="#" class="jump" data-next="#p5" data-bg="/bgtiles/cocacola.gif">dolly at school,</a>
+  </pre>
+
+  <pre class="linefive" id="p5">
+    <a href="#" class="jump" data-next="#p6" data-bg="/bgtiles/bgfloral5.gif">Dolores</a>
+  </pre>
+
+  <pre class="linesix" id="p6">
+    wanders in again to his room, a beautiful floral slip and 
+    <a href="#" class="jump" id="finalLink" data-next="#p1" data-bg="/bgtiles/bgbowsdots.gif">ups</a>
+  </pre>
+</div>
+
+<!-- end links -->
+<pre class="finallink" id="endHome">
+  <a href="/homepage.html">home</a>
+</pre>
+
+<pre class="imfeelinglucky" id="endLucky">
+  <a href="/PAGE_5/textfall.html" id="imFeelingLucky">_?+imfeelinglucky+?_</a>
+</pre>
+
+<script>
+  // Start at top on load / refresh
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  window.addEventListener('load', () => setTimeout(() => window.scrollTo(0, 0), 0));
+
+  const bgA = document.getElementById('bgA');
+  const bgB = document.getElementById('bgB');
+  let showingA = true;
+
+  function swapBackground(nextUrl){
+    const show = showingA ? bgB : bgA;
+    const hide = showingA ? bgA : bgB;
+    show.style.backgroundImage = `url('${nextUrl}')`;
+    show.classList.remove('on','fade-drift');
+    void show.offsetWidth; // restart animation
+    show.classList.add('fade-drift','on');
+    hide.classList.remove('on','fade-drift');
+    showingA = !showingA;
+  }
+
+  // Fast smooth scroll (keeps your snappy timing)
+  function fastScrollTo(targetY, duration = 220){
+    const startY = window.scrollY || window.pageYOffset;
+    const dist   = targetY - startY;
+    const start  = performance.now();
+    const ease   = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
+    function step(now){
+      const p = Math.min(1, (now - start)/duration);
+      window.scrollTo(0, startY + dist * ease(p));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function show(id){ const el = document.getElementById(id); if (el) el.style.display = 'block'; }
+
+  // ===== “Popup virus” generator (no CSS changes) =====
+  let virusStarted = false;
+  function startLuckyVirus(){
+    if (virusStarted) return;
+    virusStarted = true;
+
+    const base = document.getElementById('endLucky');
+    base.style.display = 'block'; // show the original in bottom-right
+
+    let count = 0;
+    const MAX   = 20;             // total clones (tweak)
+    const STEP  = 450;            // spawn interval ms (tweak)
+    const PADV  = 8;              // padding from viewport edges (vw/vh)
+
+    const makeClone = () => {
+      if (count >= MAX) { clearInterval(timer); return; }
+
+      const clone = base.cloneNode(true);
+      // Avoid duplicate IDs
+      clone.id = `endLuckyClone${count}`;
+      const link = clone.querySelector('a');
+      if (link) link.removeAttribute('id'); // keep href + animations
+
+      // Keep same styling class; override position for randomness
+      clone.style.display = 'block';
+      clone.style.position = 'fixed';
+      clone.style.bottom = '';  // unset bottom/right so top/left apply
+      clone.style.right  = '';
+
+      // Random viewport spot (avoid edges)
+      const top  = PADV + Math.random() * (100 - PADV * 2);
+      const left = PADV + Math.random() * (100 - PADV * 2);
+      clone.style.top  = top  + 'vh';
+      clone.style.left = left + 'vw';
+
+      // Layer them up
+      clone.style.zIndex = String(2000 + count);
+
+      document.body.appendChild(clone);
+      count++;
+    };
+
+    // small burst at reveal
+    for (let i=0;i<3;i++) setTimeout(makeClone, i*120);
+
+    // then steady infection
+    const timer = setInterval(makeClone, STEP);
+  }
+
+  // click handlers for the journey
+  document.querySelectorAll('.jump').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+
+      const nextBg = a.getAttribute('data-bg');
+      if (nextBg) swapBackground(nextBg);
+
+      const target = document.querySelector(a.getAttribute('data-next'));
+      if (target){
+        const targetTop = target.getBoundingClientRect().top + window.scrollY;
+        const OFFSET = window.innerHeight / 3;
+        fastScrollTo(targetTop - OFFSET, 220);
+      }
+
+      if (a.id === 'finalLink'){
+        show('endHome');
+        // reveal & start the “virus”
+        startLuckyVirus();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

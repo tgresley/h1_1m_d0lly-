@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lolita</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      overflow-y: auto; /* allows scrolling if content is taller than screen */
+
+      display: flex;
+      justify-content: left;
+      align-items: flex-start;
+      background-color: #fff;
+    }
+
+    .transcriptions {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;              /* no gap between stacked images */
+      width: 100vw;        /* full viewport width */
+      margin: 0;
+      padding: 0;
+    }
+
+    .transcriptions img {
+      width: 200vw;        /* ✅ each image fits exactly the screen width */
+      height: auto;        /* ✅ maintain aspect ratio */
+      display: block;      /* ✅ removes inline spacing */
+    }
+  </style>
+</head>
+<body>
+  <div class="transcriptions">
+     <img src="./transription/6.png" alt="">
+    <img src="./transription/1.png" alt="">
+   
+    <img src="./transription/2.png" alt="">
+    <img src="./transription/3.png" alt="">
+    <img src="./transription/4.png" alt="">
+    <img src="./transription/5.png" alt="">
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lolita</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    background-image: url('/bgtiles/hearts.jpg');
+    background-repeat: repeat;
+    background-size: auto;
+    background-position: top left;
+
+  }
+
+  a {
+    position: absolute;
+    font-size: 2vh;
+    color: rgb(8, 0, 255);
+    background-color: rgb(0, 247, 255);
+    text-decoration: underline;
+    cursor: pointer;
+    visibility: hidden; /* start hidden */
+  }
+
+  a.visible {
+    visibility: visible;
+  }
+
+  a:hover {
+    background: rgb(0, 21, 255);
+    color: rgb(94, 255, 0);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<a class="visible">pink</a>
+<a>dress</a>
+<a>“The</a>
+<a>Hayes</a>
+<a href="./3.html">woman”</a>
+
+<script>
+  const words = document.querySelectorAll('a');
+  const MARGIN_VW = 10;
+  const MARGIN_VH = 10;
+
+  // You can use images or plain colors here
+  const backgrounds = [
+    "url('/bgtiles/bgfairyflower.gif')",
+    "url('/bgtiles/lilys.jpg')",
+    "url('/bgtiles/bgjellybeans.gif')",
+    "url('/bgtiles/pinklips.gif')",
+  ];
+
+  // Random placement
+  words.forEach(word => {
+    word.style.left = `${MARGIN_VW + Math.random() * (80 - MARGIN_VW)}vw`;
+    word.style.top  = `${MARGIN_VH + Math.random() * (80 - MARGIN_VH)}vh`;
+  });
+
+  // Reveal next word and change background each time
+  words.forEach((word, i) => {
+    word.addEventListener('click', (e) => {
+      if (i < words.length - 1) {
+        e.preventDefault();
+        words[i + 1].classList.add('visible');
+        document.body.style.backgroundImage = backgrounds[i % backgrounds.length];
+      } else {
+        // final word: follow its link
+        document.body.style.backgroundImage = backgrounds[i % backgrounds.length];
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

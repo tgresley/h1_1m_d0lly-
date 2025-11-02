@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lolita</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    overflow-x: hidden;
+  background-image: url(./bgtiles/embyellow.jpg);
+    background-image: 10% 10%;
+  
+  }
+  .text {
+    width: 100vw;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 0.9;
+    font-size: 5.5vh;
+  }
+
+  pre {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+        color: #000000;
+  }
+
+  a{
+    color: rgb(8, 0, 255);
+
+  }
+  .reg {
+    transform: rotate(0deg);
+  }
+
+  .reg2 {
+       margin-top: -3rem;
+  }
+
+  .reg3 {
+      line-height: 1;
+  }
+
+  .upsidedown {
+    transform: rotate(181deg);
+  }
+
+  /* ✅ This container will keep both on the same horizontal line */
+  .skewline {
+    display: flex;
+    align-items: right;
+    justify-content: flex-start; /* or flex-start if you prefer left-aligned */
+  
+
+  }
+
+    .skewline3 {
+  
+ transform: rotate(1deg);
+ margin-top: -2rem;
+text-align: right;
+
+    }
+
+
+    .skewline302 {
+  
+ transform: rotate(1deg);
+ margin-top: -2rem;
+text-align: right;
+margin-right: 10%;
+    }
+
+
+
+    .skewline4 {
+  
+ transform: rotate(1.2deg);
+ margin-top: -2rem;
+text-align: right;
+    }
+
+    .skewline5 {
+       transform: rotate(1.1deg);
+margin-top: 4rem;
+    }
+
+    
+    .skewline6 {
+      margin-top: 4rem;
+       transform: rotate(2deg);
+
+    }
+
+    .upsidedown2 {
+    transform: rotate(179deg);
+  }
+
+
+     .upsidedown3 {
+    transform: rotate(181deg);
+    text-align: right;
+  }
+
+   .upsidedown4 {
+    transform: rotate(179deg);
+    text-align: left;
+    margin-top: -3rem;
+  }
+.images {
+    position: relative;
+    width: 100vw;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.imageone {
+  
+    width: 10vw;
+    height: 2rem;
+
+}
+
+.imagetwo {
+
+    width: 20%;
+    height: 3rem;
+
+}
+
+.imagethree {
+    width: auto;
+    height: 2rem;
+ 
+}
+
+.hi {
+    height: 3rem;
+}
+
+.im {
+    height: 2rem;
+}
+
+.dolly {
+    height: 2rem;
+    margin-bottom: -2rem;
+}
+
+.glb {
+   height: 4rem;
+   width: 10vw;
+}
+
+
+.popup {
+    position: fixed;
+    top: 10vh;
+   right: 2vw;
+width: 30vw;
+height: 5vh;
+    display: none;
+    font-family: Arial, sans-serif;
+
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+.lf3 {
+    height: 20rem;
+margin-top: -25rem;
+    width: auto;
+}
+
+.bubble {
+    position: absolute;
+    top: 20vh;
+    left: 3vw;
+    width: 15vw;
+    height: auto;
+    z-index: 10;
+}
+.popup p {
+    margin: 0;
+    padding: 8px;
+        font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(255, 0, 0);
+    animation: blink 1s infinite;
+        border-radius: 15px;
+    transform: scaleY(2);
+    line-height: 2rem;
+    box-shadow: #000 0px 0px 10px;
+    border-bottom: #000 3px solid;
+    border-right: #000 3px solid;
+    animation: digiFlash 1s infinite steps(1, start);
+}
+
+
+@keyframes digiFlash {
+  0%, 100% { opacity: 1; background-color: #ff0000; }
+  50% { opacity: 0; background-color: #ff0000; }
+}
+
+.nymphs {
+    height: 2rem;
+    width: 25%;
+}
+
+.gifframe {
+    height: 6rem;
+    width: auto;
+    margin-top: -5rem;
+    
+}
+
+.reg4 {
+      line-height: 1.2;
+      margin-top: -7rem;
+}
+
+.reg5{
+      line-height: 2;
+
+}
+
+
+.skewline7 {
+    margin-top: -6rem;
+    transform: rotate(-1deg);
+    text-align: left;
+}
+
+.skewline8 {
+    margin-top: -10rem;
+    transform: rotate(1deg);
+    text-align: left;
+    line-height: 1;
+}
+
+.skewline9 {
+    position: relative;
+    transform: rotate(1deg);
+    text-align: right;
+    line-height: 1;
+    z-index: 10;
+}
+
+.skewline10 {
+
+    transform: rotate(-1deg);
+    text-align: right;
+   
+}
+
+.reg7{
+  position: absolute;
+      line-height: 1.2;
+margin-top: -8.5rem;
+      background-color: #ffffff;
+    height: 4rem;
+    width: 20%;
+      text-align: left;
+       z-index: 13; 
+}
+
+.reg8{
+      line-height: 1.2;
+    transform: rotate(-0.3deg);
+      text-align: left;
+       z-index: 13;
+     
+}
+
+.skewline11 {
+
+    transform: rotate(1.5deg);
+    text-align: center;
+    line-height: 1;
+margin-top: 4rem;
+    margin-left: 10%;
+    z-index: 10;
+}
+
+.skewline12{
+
+    transform: rotate(2deg);
+    text-align: left;
+    line-height: 1;
+margin-top: -1rem;
+    z-index: 20;
+    background-color: #ffffff;
+    height: 6rem;
+    width: 100vw;
+}
+
+.skewline13{
+margin-top: 8rem;
+    transform: rotate(-2deg);
+    text-align: left;
+    line-height: 1;
+ 
+ 
+}
+
+.reg9{
+  
+     
+}
+
+.reg10{
+
+    
+    transform: rotate(-1deg);
+    text-align: left;
+margin-top: 10rem;
+      z-index: 20;
+    background-color: #ffffff;
+    height: 6rem;
+    width: 100vw;
+}
+
+.reg11{
+
+    transform: rotate(-1.4deg);
+    text-align: right;
+    
+}
+
+
+.skewline14{
+margin-top: 20rem;
+    transform: rotate(1.4deg);
+    text-align: center;
+    line-height: 1;
+}
+
+
+.skewline15{
+margin-top: 12rem;
+    transform: rotate(-4deg);
+    text-align: left;
+    line-height: 1;
+}
+.reg12{
+            /* ensure we have full width to align within */
+  text-align: right;
+  white-space: pre;  
+}
+
+
+
+.concretepoetry1 {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  margin-top: 10rem;
+  display: flex;
+
+}
+
+.concretepoetry2 {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  margin-top: 10rem;
+  display: flex;
+
+}
+
+.icons {
+  position: relative;
+    height: 3.2rem;
+    width: auto;
+    z-index: 80;
+  
+}
+
+.icon2 {
+  position: relative;
+    height: 2rem;
+    width: 3rem;
+}
+
+.icon3 {
+  position: relative;
+    height: 4.5rem;
+    width: auto;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+
+}
+
+.icon4{
+    height: 15rem;
+    width: auto;
+  margin-top: -15rem;
+  margin-left: -3rem;
+  margin-bottom: -2rem;
+}
+
+.icon5{
+  height: 2.2rem;
+  width: 12%;
+
+}
+
+.imjustagirl {
+    height: 5rem;
+    width: 20%;
+    margin-top: -5rem;
+}
+
+.godflowers{
+  height: 3rem;
+  width: 10%;
+}
+
+.icon6{
+  height: 7rem;
+  margin-top: -7rem;
+}
+
+.icon7{
+  height: 3rem;
+  margin-bottom: -2rem ;
+}
+
+.icon8 {
+  height: 9rem;
+  margin-bottom: -2rem;
+}
+
+.icon9 {
+height: 3.2rem;
+margin-top: -3.2rem;
+}
+
+.bow-strip {
+  width: 100%;
+  height: 3rem;
+  background-image: url("./tumblricons/BWHAT.jpg");
+  background-repeat: repeat-x;
+  background-size: 4rem 3rem;           /* image size */
+ 
+}
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+<pre class="skewline11">
+        	Skin touches skin, blending with the sand
+</pre>
+
+
+<pre class="skewline12">
+ging his pants whilst angrily walking away qwith the washing  	
+</pre>
+
+<pre class="reg9">
+ hen I can’t see yuu
+e letters are burnt.                    His typewriter packed away.packs a suitcase for Lolita, noticing a H+H in a heart on her v
+aits and ribbons in her hair			                      	a shadow behind pri
+She gets on top of him and undoes his striped pajamaes
+He bovichlv ouivorc________________ 	__		____   __
+I don’t want to leave the Congo		                            	e sighs and walks
+ith her feet and throws things to distract h		She cross
+
+
+g laughs at  lolita making a breast joke
+ the sparklers—her underwear
+</pre>
+<pre class="skewline13">
+                                                        visible. ROR
+</pre>
+
+
+
+<pre class="reg9">
+nts tocall her mother. She thinks she is in hospital
+ause your mother is dead”.
+			                                                     He peaks over at her, watches he
+                                                                        "Get back in the boat with charlie
+                                                                      </pre>
+<pre class="reg10">ts, she places her head on his leg bargaining for her allowa nould be $@“
+
+seat, she rocks it back and forth with her freshly painted toen
+
+
+g dishes - he aboided his 
+husbandly duties - drugging sleepi
+
+el like we’re grown ups”, red lip and undo braids. long rend nails trying to open his drawer
+</pre>
+
+
+
+
+
+
+  
+
+
+
+</body>
+</html>

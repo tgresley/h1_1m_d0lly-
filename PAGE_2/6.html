@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lolita</title>
+<style>
+  * { box-sizing: border-box; }
+  body{
+    margin:0; overflow-x:hidden;
+    background-image:url('/bgtiles/pinksatin.gif');
+    background-repeat:repeat;
+  }
+  pre{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size:2vh; color:#000; white-space:pre-wrap; margin:0;
+  }
+  .skewline8{ margin-top:20rem; transform:rotate(1deg); text-align:left; 
+    background-color: aliceblue;
+    line-height:1; }
+  a{ color:magenta; 
+    
+    text-decoration:underline; }
+
+a:hover{
+  background-color: aquamarine;
+  color: blue;
+}
+
+
+
+  .fullscreen-gif{
+    position:fixed; inset:0; width:100%; height:100%;
+    object-fit:cover; display:none; pointer-events:none; z-index:10;
+  }
+
+  .smoking-gif, .smoking-gif-2, .smoking-gif-3, .smoking-gif-4, .smoking-gif-5, .smoking-gif-6{
+    border:4px solid rgba(255,255,255,0.9);
+    box-shadow:0 8px 24px rgba(0,0,0,0.6), 0 0 18px rgba(255,0,187,0.18);
+    display:none; pointer-events:none; z-index:15;
+  }
+  .smoking-gif{   position:fixed; top:20%;  right:10%; width:20%; height:auto; }
+  .smoking-gif-2{ position:fixed; top:50%;  right:20%; width:10%; height:auto; }
+  .smoking-gif-3{ position:fixed; top:10%;  left:5%;  width:45%; height:auto; }
+  .smoking-gif-4{ position:fixed; bottom:10%; left:15%; width:10%; height:auto; }
+  .smoking-gif-5{ position:fixed; bottom:20%; right:5%;  width:15%; height:auto; }
+  .smoking-gif-6{ position:fixed; top:30%;  left:30%; width:10%; height:auto; }
+
+  #restOfText{ display:none; position:relative; z-index:20; }
+
+  /* Floating "giggles at" — looks like text link */
+  .floating-giggles{
+    position:fixed;
+    z-index:16;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size:2vh;
+    color: white;
+    background-color: magenta;
+    padding: 2px;
+    text-decoration:underline;
+ 
+    border:none;
+    padding:0;
+    pointer-events:auto;
+  }
+
+  #humbertBtn{
+    position:fixed; z-index:16; display:none;
+    color: magenta;text-decoration: underline; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 2vh;
+
+    cursor:pointer; user-select:none; pointer-events:auto;
+  }
+</style>
+</head>
+<body>
+
+<pre class="skewline8">
+  e puts a dime in the bed to activate its <a href="#" id="massageLink">massaging</a> 
+</pre>
+  
+<pre class="skewline8" id="restOfText">
+  - she tri
+  hayes femininely <a href="#" id="smokeLink">blows smoke</a> and
+</pre>
+
+<img class="fullscreen-gif" id="massageGif" src="/PAGE_2/gifs/footmassaging.gif" alt="">
+
+<img class="smoking-gif"   id="smokeGif"  src="/PAGE_2/gifs/smokingisnotcool.gif" alt="">
+<img class="smoking-gif-2" id="smokeGif2" src="/PAGE_2/gifs/cigarettes.gif"        alt="">
+<img class="smoking-gif-3" id="smokeGif3" src="/PAGE_2/gifs/cigarettebanenr.gif"   alt="">
+<img class="smoking-gif-4" id="smokeGif4" src="/PAGE_2/gifs/deathcigarettes.gif"   alt="">
+<img class="smoking-gif-5" id="smokeGif5" src="/PAGE_2/gifs/womansmoking.gif"      alt="">
+<img class="smoking-gif-6" id="smokeGif6" src="/PAGE_2/gifs/womansmoking2.gif"     alt="">
+
+<button id="humbertBtn" type="button">HUMBERT</button>
+
+
+<script>
+  const massageLink = document.getElementById('massageLink');
+  const massageGif  = document.getElementById('massageGif');
+  const restOfText  = document.getElementById('restOfText');
+  const smokeLink   = document.getElementById('smokeLink');
+  const humbertBtn  = document.getElementById('humbertBtn');
+
+  massageLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    massageGif.style.display = 'block';
+    restOfText.style.display = 'block';
+  });
+
+  const smokingImgs = [
+    document.getElementById('smokeGif'),
+    document.getElementById('smokeGif2'),
+    document.getElementById('smokeGif3'),
+    document.getElementById('smokeGif4'),
+    document.getElementById('smokeGif5'),
+    document.getElementById('smokeGif6')
+  ];
+
+  function randomViewportPosition(edgePct = 6){
+    return {
+      top:  (edgePct + Math.random() * (100 - edgePct*2)) + 'vh',
+      left: (edgePct + Math.random() * (100 - edgePct*2)) + 'vw'
+    };
+  }
+
+  function showHumbertButton(){
+    const pos = randomViewportPosition(6);
+    humbertBtn.style.top  = pos.top;
+    humbertBtn.style.left = pos.left;
+    humbertBtn.style.display = 'block';
+  }
+
+  let gigglesMade = false;
+  function createGigglesLink(){
+    if (gigglesMade) return;
+    gigglesMade = true;
+    const a = document.createElement('a');
+    a.href = '#';
+    a.textContent = 'giggles at';
+    a.className = 'floating-giggles';
+    const pos = randomViewportPosition(8);
+    a.style.top  = pos.top;
+    a.style.left = pos.left;
+    document.body.appendChild(a);
+
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      showHumbertButton();
+    });
+  }
+
+  let smokedOnce = false;
+  smokeLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (smokedOnce) return;
+    smokedOnce = true;
+
+    const MIN = 80, MAX = 1400;
+    smokingImgs.forEach(img => {
+      const delay = Math.random() * (MAX - MIN) + MIN;
+      setTimeout(() => { img.style.display = 'block'; }, delay);
+    });
+    createGigglesLink();
+  });
+
+  humbertBtn.addEventListener('click', () => {
+    window.location.href = '/PAGE_2/7.html';
+  });
+</script>
+
+</body>
+</html>
