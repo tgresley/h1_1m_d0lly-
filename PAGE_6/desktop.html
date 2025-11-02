@@ -261,7 +261,7 @@
 
   <!-- CD: fixed; will open Leopard CD player -->
   <figure class="folder12" data-fixed data-win-left="86%" data-win-top="4%"
-          data-audio="/audio/hurt.mp3" data-title="CD — Player">
+          data-audio="../audio/hurt.mp3" data-title="CD — Player">
     <img src="./folders/CD.png" alt="" draggable="false"><figcaption>CD</figcaption>
   </figure>
 
@@ -665,7 +665,7 @@ win.style.bottom = 'auto';
 const drive = document.querySelector('.folder14');
 if (drive) {
   drive.addEventListener('dblclick', () => {
-    window.open('/homepage.html', '_self'); // or './yourpage.html'
+    window.open('../homepage.html', '_self'); // or './yourpage.html'
   });
 }
 
@@ -674,7 +674,7 @@ if (drive) {
   const cd = document.querySelector('.folder12');
   if (cd){
     cd.addEventListener('dblclick', ()=>{
-      const src   = cd.dataset.audio || '/audio/hurt.mp3';
+      const src   = cd.dataset.audio || '../audio/hurt.mp3';
       const title = cd.dataset.title || 'CD — Player';
       createAudioWindow({ src, title, left: cd.dataset.winLeft, top: cd.dataset.winTop, autoplay:true });
     });

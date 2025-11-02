@@ -7,7 +7,7 @@
   html, body {
     margin: 0;
     height: 100%;
-    background: url(/backgrioundfull/grave.jpg);
+    background: url('../backgrioundfull/grave.jpg');
     background-size: contain;
     font-family: Arial, Helvetica, sans-serif;
     overflow: hidden;
@@ -39,7 +39,7 @@ const words = [
   "her","hair","a","shadow","behind","pri"
 ];
 
-const song = new Audio('/audio/bowie.mp3'); // ← change to your file
+const song = new Audio('../audio/bowie.mp3'); // ← change to your file
 song.preload = 'auto';
 let songStarted = false;
 function startSongOnce(){

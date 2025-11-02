@@ -49,8 +49,8 @@
     pointer-events: none; /* nothing clickable until we allow it */
   }
   .stageBox img.visible   { opacity: 1; }
-  .stageBox img.clickable { pointer-events: auto; cursor: url('/cursors/neonflower.cur'), auto; }
-  #enterGif:hover { filter: invert(2); cursor: url('/cursors/neonflower.cur'), auto;}
+  .stageBox img.clickable { pointer-events: auto; cursor: url('../cursors/neonflower.cur'), auto; }
+  #enterGif:hover { filter: invert(2); cursor: url('../cursors/neonflower.cur'), auto;}
   .stageBox img.clickable:focus-visible { outline: 2px solid #fff; }
 
   /* ---- Text layer (top), aligned to the same 200vh box ---- */
@@ -219,7 +219,7 @@ cursor: url('/cursors/neonflower.cur'), auto;
     <img src="./blackbg/welcome.gif"                     alt="" style="top: 3%;   left: 50%;  width: 19%;"
     class="line-trigger" data-line="4">
 
-    <a href="/PAGE_8/index.html" target="_self" rel="noopener">
+    <a href="../PAGE_8/index.html" target="_self" rel="noopener">
       <img src="./blackbg/draggoneyes.gif" alt="dragon eyes" class="clickable"
            style="top: 20%; left: 30%; width: 48%; transition: transform 220ms ease, filter 220ms ease; transform-origin: center; filter: none;   cursor: url('/cursors/neonflower.cur'), auto;"
            onmouseover="this.style.transform='scale(1.12)'; this.style.filter='(1)';"
@@ -237,7 +237,7 @@ cursor: url('/cursors/neonflower.cur'), auto;
     <img src="./blackbg/@.gif"                           alt="" style="top: 8%;   left: 32%;  width: 3%;">
     <img src="./blackbg/ARROWUP.gif"                     alt="" style="bottom: 3%; left: 50%; width: 6%;">
 
-      <a href="/homepage.html" target="_self" rel="noopener">
+      <a href="../index.html" target="_self" rel="noopener">
     <img class="clickable" src="./blackbg/BACK.gif"                        alt="" style="bottom: 3%; left: 2%;  width: 9%;">
   </a>
 
@@ -251,7 +251,7 @@ cursor: url('/cursors/neonflower.cur'), auto;
     <img src="./blackbg/CORNERDETAIL.gif"                alt="" style="width: 14%; bottom: 8%; left: 3%;">
     <img src="./blackbg/COUNTRYGIRL.gif"                 alt="" style="width: 21%; top: 80%; left: 15%;">
 
-        <a href="/PAGE_4/cross.html" target="_self" rel="noopener">
+        <a href="../PAGE_4/cross.html" target="_self" rel="noopener">
     <img src="./blackbg/cross.gif"                       alt="" style="width: 8%;  top: 25%; right: 10%;" class="clickable"
            style="top: 20%; left: 30%; width: 48%; transition: transform 220ms ease, filter 220ms ease; transform-origin: center; filter: none; cursor: context-menu;"
            onmouseover="this.style.transform='scale(1.12)'; this.style.filter='(1)';"
@@ -337,12 +337,12 @@ function armJukebox() {
 
   // List your audio file paths here:
   const audioFiles = [
-    '/audio/streisand.mp3',
-    '/audio/labelle.mp3',
-    '/audio/stones.mp3',
-    '/audio/fate.mp3',
-    '/audio/kiss.mp3',
-    '/audio/freak.mp3',
+    '../audio/streisand.mp3',
+    '../audio/labelle.mp3',
+    '../audio/stones.mp3',
+    '../audio/fate.mp3',
+    '../audio/kiss.mp3',
+    '../audio/freak.mp3',
   ];
 
   const playRandom = () => {

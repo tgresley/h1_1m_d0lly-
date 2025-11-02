@@ -6,7 +6,7 @@ const DEFAULTS = {
   numStreams: 8,           // starting number of text bands
   speedMin: 1,              // min horizontal drift speed per stream
   speedMax: 3,              // max horizontal drift speed per stream
-  bgImage: "/backgrioundfull/skyflower.jpg"
+  bgImage: "../backgrioundfull/skyflower.jpg"
 };
 
 // UI ranges (so you can change how far sliders can travel)

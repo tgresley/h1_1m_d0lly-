@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   /* ===== minimal page ===== */
-  html, body { margin:0; padding:0; background: url('/bgtiles/sky.jpg');  background-size: 50%; }
+  html, body { margin:0; padding:0; background: url('../bgtiles/sky.jpg');  background-size: 50%; }
   body{
     font-family:"Times New Roman", Times, serif;
     font-size:13px;
@@ -32,7 +32,7 @@
   :root{ --size:100px; --gap:6px; }
   .cross{
     
-      background-image: url('/bgtiles/bgfloral5.gif');
+      background-image: url('../bgtiles/bgfloral5.gif');
   padding: 10px;
     display:grid;
     grid-template-columns: 1fr auto 1fr; /* center column = vertical arm */
@@ -63,7 +63,7 @@
   .blinkie:hover{
     border-color:#c3ff00;
     opacity:.9;
-    cursor: url('/cursors/rainbowcross.cur'), auto;
+    cursor: url('../cursors/rainbowcross.cur'), auto;
   }
 
 
@@ -76,7 +76,7 @@
 
   .paradisum:hover{
     border-color:#0d00ff;
-    cursor: url('/cursors/treble'), auto;
+    cursor: url('../cursors/treble'), auto;
   }
 
 
@@ -88,7 +88,7 @@
 
 .gloria:hover{
       border-color:#0d00ff;
-    cursor: url('/cursors/treble'), auto;
+    cursor: url('../cursors/treble'), auto;
 }
 
   nav{ margin-top:10px; font-size:12px; }
@@ -117,7 +117,7 @@
     <div class="v">
       <!-- link1 → cross1 -->
       <img class="blinkie" data-target="#cross1" src="./blinkies words/ablue.gif" alt="a blue">
-      <img  class="paradisum" src="./blinkies words/a beac.gif" alt="a beach" data-sound="/audio/paradisum.mp3">
+      <img  class="paradisum" src="./blinkies words/a beac.gif" alt="a beach" data-sound="../audio/paradisum.mp3">
       <img id="cross1" src="./religiongif/cross2.gif" alt="cross" style="display:none;">
 
       <img src="./blinkies words/humbert.gif" alt="humbert">
@@ -204,7 +204,7 @@
       <img src="./blinkies words/wires a soft .gif" alt="wires a soft …">
 
       <!-- link9 → cross10 -->
-      <img class="gloria" src="./blinkies words/musicplays.gif" alt="music plays". data-sound="/audio/gloria.mp3">
+      <img class="gloria" src="./blinkies words/musicplays.gif" alt="music plays". data-sound="../audio/gloria.mp3">
       <img id="cross10" src="./religiongif/cross10.gif" alt="cross" style="display:none;">
 
       <img class="blinkie"  data-target="#cross10" src="./blinkies words/lolitastandsat.gif" alt="lolita stands at">
@@ -279,7 +279,7 @@
   </main>
 
   <nav>
-    <a href="#">again</a> • <a href="#" onclick="alert('For I know that my redeemer liveth, and that he shall stand at the latter day upon the earth 19:25 - KJ'); return false;">confess</a> • <a href="/PAGE_8/index.html" >sleep</a>
+    <a href="../index.html">again</a> • <a href="#" onclick="alert('For I know that my redeemer liveth, and that he shall stand at the latter day upon the earth 19:25 - KJ'); return false;">confess</a> • <a href="../PAGE_8/index.html" >sleep</a>
   </nav>
 </div>
 
