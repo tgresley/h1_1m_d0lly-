@@ -11,6 +11,7 @@
     overflow-x: hidden;
   background-image: url(./bgtiles/embyellow.jpg);
     background-image: 10% 10%;
+    cursor: url('./cursors/lolitaword.cur'), auto;
   
   }
   .text {
@@ -29,8 +30,13 @@
   }
 
   a{
-    color: rgb(8, 0, 255);
+    color: rgb(0, 102, 204);
+    cursor: url('./cursors/lolita.cur'), auto;
 
+  }
+
+  a:hover {
+    color: blue;
   }
   .reg {
     transform: rotate(0deg);
@@ -122,6 +128,7 @@ margin-top: 4rem;
   
     width: 10vw;
     height: 2%;
+    cursor: url('./cursors/LOLITA1.cur'), auto;
 
 }
 
@@ -148,9 +155,11 @@ margin-top: 4rem;
 
 
 .lf3 {
+  position: relative;
     height: 20rem;
 margin-top: -25rem;
     width: auto;
+    z-index: 1000;
 }
 
 .bubble {
@@ -334,7 +343,7 @@ margin-top: 12rem;
   position: relative;
     height: 3.2rem;
     width: auto;
-    z-index: 80;
+    z-index: 1;
   
 }
 
@@ -359,6 +368,33 @@ margin-top: 12rem;
   margin-top: -15rem;
   margin-left: -3rem;
   margin-bottom: -2rem;
+   transition: transform .15s ease, filter .15s ease;
+  image-rendering: pixelated; /* if your icon is low-res/pixel */
+  cursor: url('./cursors/lolitaword.cur'), auto; /* default cursor */
+}
+
+
+
+/* Hover state: custom cursor + subtle motion/glow */
+.icon4:hover{
+  cursor: url('./cursors/purplebow.cur'), auto; /* 8 8 = hotspot x/y */
+  transform: translateY(-2px) scale(1.02);
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+}
+
+/* Optional: make it “wiggle” on hover (Y2K vibes) */
+@keyframes wiggle {
+  0%   { transform: rotate(0deg) scale(1.02) translateY(-2px); }
+  50%  { transform: rotate(2deg) scale(1.04) translateY(-1px); }
+  100% { transform: rotate(0deg) scale(1.02) translateY(-2px); }
+}
+.icon4.hover-wiggle:hover{
+  animation: wiggle .35s ease-in-out infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .icon4, .icon4:hover{ transition: none; animation: none; }
 }
 
 .icon5{
@@ -415,6 +451,7 @@ width: 30%;
 height: 15%;
     font-family: Arial, sans-serif;
     z-index: 1000; /* Ensure it stays on top */
+     cursor: url('./cursors/yellowpolka.cur'), auto;
 }
 
 .popup p {
@@ -435,10 +472,6 @@ height: 15%;
     animation: digiFlash 1s infinite steps(1, start);
 }
 
-.popup:hover{
-  cursor: url('./cursors/yellowpolka.cur'), auto;
-}
-
 @keyframes digiFlash {
   0%, 100% { opacity: 1; background-color: #ff0000; }
   50% { opacity: 0; background-color: #ff0000; }
@@ -453,7 +486,7 @@ height: 15%;
   display: flex;                /* center the <p> inside */
   align-items: center;
   justify-content: center;
-
+  cursor: url('./cursors/yellowpolka.cur'), auto;
   background-color: #7eecff;
   border: 1px solid black;
   border-radius: 2px;
@@ -634,6 +667,104 @@ font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;    /* ho
   pointer-events: auto;
 }
 
+/* ===== overlay now scrolls with page ===== */
+#desk-layer {
+  position: absolute;      /* instead of fixed */
+  inset: 0;
+  display: none;
+  z-index: 99999;
+  pointer-events: none;    /* so it doesn't block page scroll */
+}
+#desk-layer.show {
+  display: block;
+}
+
+/* ===== tiny Mac-style icons ===== */
+.desk-file {
+  position: absolute;
+  width: 90px;             /* much smaller thumbnail */
+  pointer-events: auto;
+  user-select: none;
+}
+
+.desk-file .thumb {
+  width: 100%;
+  height: 65px;            /* smaller preview */
+  background: #fff;
+  border-radius: 0px;
+  border: 3px solid rgba(0,0,0,.1);
+  box-shadow: 0 6px 10px rgba(0,0,0,.25), 0 2px 4px rgba(0,0,0,.18);
+  overflow: hidden;
+}
+.desk-file img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* filename under image */
+.desk-file .label {
+  margin-top: 4px;
+  text-align: center;
+  font: 10px/1.1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  color: #f8f8f8;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.desk-file:hover .thumb {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(0,0,0,.3);
+  transition: transform .1s ease, box-shadow .1s ease;
+}
+/* === clickable FOLDER styling === */
+.icons[src*="damaskfolder"] {
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+/* Hover effect: lift slightly, add soft glow */
+.icons[src*="damaskfolder"]:hover {
+  transform: translateY(-3px) scale(1.03);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35))
+          brightness(1.1)
+          saturate(1.2);
+}
+
+/* Optional: tiny “pulse” animation for attention */
+@keyframes folderPulse {
+  0%, 100% { filter: drop-shadow(0 6px 10px rgba(255,255,255,0.2)); }
+  50% { filter: drop-shadow(0 6px 10px rgba(255,255,255,0.5)); }
+}
+
+.icons[src*="damaskfolder"].pulse {
+  animation: folderPulse 1.4s ease-in-out infinite;
+}
+
+/* === clickable WOMAN folder styling (no class required) === */
+img[src*="womanfolder"]{
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+img[src*="womanfolder"]:hover{
+  transform: translateY(-3px) scale(1.03);
+  filter: drop-shadow(0 6px 10px rgba(255,105,180,.5))
+          brightness(1.1)
+          saturate(1.2);
+}
+@keyframes womanFolderPulse{
+  0%,100%{ filter: drop-shadow(0 6px 10px rgba(255,182,193,.3)); }
+  50%    { filter: drop-shadow(0 6px 10px rgba(255,182,193,.6)); }
+}
+img[src*="womanfolder"].pulse{ animation: womanFolderPulse 1.4s ease-in-out infinite; }
+
+
+
 </style>
 </head>
 <body>
@@ -674,12 +805,12 @@ font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;    /* ho
   <div class="text">
 <pre class="reg">      
 "you got a flat mister"  <img  class="imageone" src="./images/LOLITA1.jpg" alt="">  <img class="hi" src="./images/hi.png" alt="">⚤⚤⚤⚤⚤⚤⚤⚤⚤⚤⚤⚤⚤Humbert realises they are being followed
-grabs a <a href="./PAGE_2/landing1.html">white pillow</a>and covers himself in white sheets 
+grabs a <a href="./story/landing1.html">white pillow</a>and covers himself in white sheets 
 👙👙👙👙👙👙"get☆☆☆☆☆☆☆out". <img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="icons" src="icons/bettyboop.png" alt=""><img  class="imagetwo" src="./gifs/littlegirlsareprecious.gif" alt="">
 s over the ugly <img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png"><img class="icon2" src="./icons/daddy.png">planes — there was no-one else like me☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻
  <img  class="imagethree" src="./images/oldstickers.png" alt="">⍝⍝⍝⍝⍝lightning flashes,     blue fever  <a href="./PAGE_8/index.html">fisheye room.</a>    shadows on t
 <img src="./gifs/pond.gif" style="width: 20vw;height: 2rem;">  🌸🌸🌸🌸 <img src="./gifs/CLICKHERE.gif" style="width: 30vw; height: 2.5rem;"> <span style="position: relative; font-size: 4vh;">🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻 🚻</span>
-<img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">  <img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">  <img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">  <img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">                                                  
+<img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">  <img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">  <img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">  <img  class="glb" src="./images/gothiclolitabible.jpg"      alt="">   <img src="./icons/guitar.png" alt="" style="width: 5%;"><img src="./icons/guitar.png" alt="" style="width: 5%;"><img src="./icons/guitar.png" alt="" style="width: 5%;"><img src="./icons/guitar.png" alt="" style="width: 5%;"><img src="./icons/guitar.png" alt="" style="width: 5%;">                    <img id= "bmbox" src="./gifs/bmbox.gif" alt="" style="width: 12%; height:auto;">                                               
 continues Quilty stumble   <img  class="nymphs" src="./gifs/nymphs.gif"      alt=""> <img  class="nymphs" src="./gifs/nymphs.gif"      style="width: 10%; height: 2.3rem;">Hopefully poignant thing was np h  
 GE RE <img  class="icons" src="icons/flowers.jpg"><img  class="icons" src="icons/flowers.jpg"><img  class="icons" src="icons/flowers.jpg"><img  class="icons" src="icons/flowers.jpg">i <img src="./gifs/scrolldown.gif" style="width: 30%;height: 2rem;">mut be hard for you to undertand my mytificati
 aps hi gun and stares in beads of <a href="./PAGE_5/textfall.html">sweat  ❁❁❁❁❁❁❁ </a>lo in the passenger
@@ -690,7 +821,7 @@ practically naked, <img  class="lf3" src="./gifs/lolitafashion3.gif"      alt=""
 
 
 <div class="skewline">
-  <pre class="upsidedown"> ❃❃❃❃❃❃❃❃❃❃❃ <a href="./PAGE_4/cross.html">Lolita</a> sits and sings as Humbert freaks</pre>
+  <pre class="upsidedown"> ❃❃❃❃❃❃❃❃❃❃❃ <a href="./cross/cross.html">Lolita</a> sits and sings as Humbert freaks</pre>
 
   <pre class="reg">         Humbert runs the</pre>
 </div>
@@ -709,10 +840,11 @@ practically naked, <img  class="lf3" src="./gifs/lolitafashion3.gif"      alt=""
 't come out of an  <img src="./gifs/bubblegum3.gif" style="width: 15%; height: 6rem; margin-bottom: -4rem;">             apple tree, dont come close to meeeee         
 s planned locations and areas to be at certain times. <img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png"><img  class="icons"src="./icons/cokefolder.png">
 
-    <a href="./PAGE_3/index.html">bed"</a>
+    <a href="./bed/index.html">"bed"</a>
 </pre>
 
 <pre class="reg2">
+  
   
             Closeup on lolitas red lip and face<img class="imjustagirl" src="./gifs/imjustagirl.gif"> <img class="imjustagirl" src="./gifs/imjustagirl.gif"> A
 e than anythi  </pre>
@@ -730,12 +862,12 @@ ipstick, flushed in bed    -  the record <pre class="skewline302"><img class="ic
 angs out of the    window full cheeks through the wet forest roa
 vas clever our pursuer, he k. <img  style=" width: 30%; height: 5rem; margin-bottom: -4rem;"src="./gifs/photoslides.gif" >   ept chasing cars - as real as
    behind them <img class="icons" src="./icons/damaskfolder.png"><img class="icons" src="./icons/damaskfolder.png" >                                                                 <img class="icons" src="./icons/tits.png"><img class="icons" src="./icons/tits.png"><img class="icons" src="./icons/tits.png"><img class="icons" src="./icons/tits.png">
-e sings      in the car as Humbert is in the shop - lolita smiles and<pre style="font-size: 11vh;"><a href="./PAGE_7/index8.html">🀥🀥</a>🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥</pre>
+e sings      in the car as Humbert is in the shop - lolita smiles and<pre style="font-size: 11vh;"><a href="./wind/wind.html">🀥🀥</a>🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥🀥</pre>
 ver really crazy abouut” <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">  <img class="icon9" src="./icons/kelloggs.png">humbert sobs and is b
 I knew         long ago - she coul.            d fade and wither, I could sto go n ✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬
 o             Aw	LAKE point cottage.         s - lo is in bed Humbert offers to ✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬✬
 inst the <img src="./gifs/teen.gif" style="width: 40%; height: 2rem;">         <img src="./images/BWLOLITA.jpeg" style="width: 40%; height: 2.4rem;">
-  <img class="icon5" src="./icons/orangeflower.jpg"> <img class="icons" src="./icons/glasses.png"> <img class="icons" src="./icons/glasses.png">   <a href="./PAGE_9/endpage.html">Say goodbye</a>  Molly say goodbye to <img src="./gifs/makemoney.gif" style="height: 4rem; width: 25%;">
+  <img class="icon5" src="./icons/orangeflower.jpg"> <img class="icons" src="./icons/glasses.png"> <img class="icons" src="./icons/glasses.png">   <a href="./goodbye/endpage.html">Say goodbye</a>  Molly say goodbye to <img src="./gifs/makemoney.gif" style="height: 4rem; width: 25%;">
            <img src="./icons/lady3d.png" style="height: 9rem; margin-top: -8rem; z-index: 100;">       He drives through cow fields cow  b  <img style="width: 20%; height: 6rem; margin-bottom: -4rem;" src="./icons/Folder-Heart-icon.png" >
 </pre>
 
@@ -766,56 +898,160 @@ ves oodbyre, he is destroyed - seeing the young girl in her s <img src="./gifs/b
 </pre>
 
 
-  
+  <!-- put near the end of <body> -->
+<div id="desk-layer" aria-hidden="true"></div>
+
 
 
 
 </body>
+
 <script>
-(function(){
-  const clamp = (v,min,max)=>Math.min(Math.max(v,min),max);
-  const rand  = (min,max)=>Math.random()*(max-min)+min;
+document.addEventListener('DOMContentLoaded', () => {
+  const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+  const rand  = (min, max) => Math.random() * (max - min) + min;
 
+  // ========= POPUPS (unchanged) =========
   const popups = Array.from(document.querySelectorAll('[class^="popup"]'));
-
   popups.forEach(el => {
-    const delay  = +el.dataset.delay  || 0;
-    const copies = +el.dataset.copies || 0;
-    const jitter = +el.dataset.jitter || 20;
-
-    // Hide them initially
+    const delay = +el.dataset.delay || 0;
     el.style.opacity = 0;
-    el.style.pointerEvents = "none";
-    el.style.transition = "opacity 0.4s ease";
+    el.style.pointerEvents = 'none';
+    el.style.transition = 'opacity 0.35s ease';
+    setTimeout(() => { el.style.opacity = 1; el.style.pointerEvents = 'auto'; }, delay);
 
-    setTimeout(() => {
-      // Reveal the original popup
-      el.style.opacity = 1;
-      el.style.pointerEvents = "auto";
-
-      // Duplicate it a few times in slightly different positions
-      for (let i=0; i<copies; i++){
+    let duped = false;
+    el.addEventListener('click', () => {
+      if (duped) return; duped = true;
+      const copies = +el.dataset.copies || 3;
+      const jitter = +el.dataset.jitter || 25;
+      const baseZ  = (parseInt(getComputedStyle(el).zIndex) || 1000) + 1;
+      const rect   = el.getBoundingClientRect();
+      for (let i = 0; i < copies; i++) {
         const clone = el.cloneNode(true);
-        clone.style.opacity = 1;
-        clone.style.pointerEvents = "none";
-        clone.style.position = "fixed";
-        clone.style.transition = "none";
-        clone.style.zIndex = (parseInt(getComputedStyle(el).zIndex)||1000) + i + 1;
-
-        // Base position
-        const rect = el.getBoundingClientRect();
-        const top  = clamp(rect.top  + rand(-jitter, jitter), 0, window.innerHeight - rect.height);
-        const left = clamp(rect.left + rand(-jitter, jitter), 0, window.innerWidth  - rect.width);
-
-        clone.style.top  = `${top}px`;
-        clone.style.left = `${left}px`;
-
+        clone.classList.add('popup-clone');
+        clone.style.position = 'fixed';
+        clone.style.opacity = '1';
+        clone.style.pointerEvents = 'none';
+        clone.style.transition = 'none';
+        clone.style.zIndex = baseZ + i;
+        const top  = clamp(rect.top  + rand(-jitter, jitter), 0, innerHeight - rect.height);
+        const left = clamp(rect.left + rand(-jitter, jitter), 0, innerWidth  - rect.width);
+        clone.style.top = `${top}px`; clone.style.left = `${left}px`;
         document.body.appendChild(clone);
       }
-    }, delay);
+    }, { passive: true });
   });
-})();
+
+  // ========= BOOMBOX (unchanged) =========
+  const bmbox = document.getElementById('bmbox');
+  if (bmbox) {
+    let audioEl = document.getElementById('boombox-audio');
+    if (!audioEl) {
+      const src = bmbox.dataset.audio || './audio/Lolita.mp3';
+      audioEl = new Audio(src); audioEl.preload = 'auto';
+    }
+    audioEl.loop = false; audioEl.volume = 0.9;
+    bmbox.style.cursor = 'pointer';
+    bmbox.addEventListener('click', () => {
+      if (audioEl.paused) { audioEl.currentTime = 0; audioEl.play().catch(()=>{}); bmbox.style.filter='drop-shadow(0 0 8px rgba(0,0,0,.6))'; }
+      else { audioEl.pause(); bmbox.style.filter=''; }
+    }, { passive: true });
+    document.addEventListener('visibilitychange', () => { if (document.hidden && !audioEl.paused) audioEl.pause(); });
+  }
+
+  // ========= “sexygirl” alert (unchanged) =========
+  document.querySelectorAll('img.icon4[src*="sexygirl"]').forEach(img => {
+    img.addEventListener('click', () => alert('pervert'));
+  });
+
+  // ========= FOLDERS: damask vs womanfolder have different fallbacks =========
+  const layer = document.getElementById('desk-layer');
+
+  // default sets (edit these paths to your actual assets)
+  const fallbackDamask = [
+    './tumblricons/bangles.jpg',
+    './tumblricons/bows.webp',
+    './tumblricons/converse.webp',
+    './tumblricons/flowers.jpg',
+    './tumblricons/show.webp',
+    './tumblricons/heroin.webp'
+  ];
+  const fallbackWomen = [
+    './wfgifs/bikini.gif',
+    './wfgifs/dancing.gif',
+    './wfgifs/faces.gif',
+    './wfgifs/lady.gif',
+    './wfgifs/rotate.gif',
+   
+  ];
+
+  // Bind both damask + womanfolder
+  document.querySelectorAll('img.icons[src*="damaskfolder"], img[src*="womanfolder"]').forEach(folder => {
+    folder.style.cursor = 'pointer';
+    folder.addEventListener('click', () => {
+      // allow per-element override
+      const dataList = (folder.dataset.images || '')
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      // detect type from src
+      const isWoman = /womanfolder/i.test(folder.src);
+      const urls = dataList.length ? dataList : (isWoman ? fallbackWomen : fallbackDamask);
+
+      const rect = folder.getBoundingClientRect();
+      const baseX = rect.left + window.scrollX + rect.width / 2;
+      const baseY = rect.top  + window.scrollY + rect.height + 10;
+      showDesktopOverPage(urls, baseX, baseY);
+    });
+  });
+
+function showDesktopOverPage(urls, baseX, baseY) {
+  clearLayer();
+  layer.classList.add('show');
+
+  // Show ALL images evenly across the viewport
+  const cols = Math.ceil(Math.sqrt(urls.length)); // grid layout
+  const rows = Math.ceil(urls.length / cols);
+  const cellW = window.innerWidth / cols;
+  const cellH = window.innerHeight / rows;
+
+  urls.forEach((src, i) => {
+    const card = document.createElement('div');
+    card.className = 'desk-file';
+    card.innerHTML = `
+      <div class="thumb"><img src="${src}" alt=""></div>
+      <div class="label">${(src.split('/').pop() || 'Screenshot')}</div>
+    `;
+
+    // grid position with tiny randomness
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    const x = col * cellW + Math.random() * (cellW * 0.3);
+    const y = row * cellH + Math.random() * (cellH * 0.3);
+
+    card.style.position = 'absolute';
+    card.style.left = `${x}px`;
+    card.style.top = `${y + window.scrollY}px`; // respect page scroll
+    layer.appendChild(card);
+  });
+}
+
+
+  function clearLayer() {
+    if (!layer) return;
+    layer.classList.remove('show');
+    while (layer.firstChild) layer.removeChild(layer.firstChild);
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') clearLayer(); });
+  if (layer) layer.addEventListener('click', e => { if (!e.target.closest('.desk-file')) clearLayer(); });
+});
 </script>
+
+
+
 
 
 </html>

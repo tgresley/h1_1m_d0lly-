@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lolita</title>
+<style>
+  * { box-sizing: border-box;   cursor: url('../cursors/pinkcandy.cur'), auto;}
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background-image: url('../bgtiles/sky.jpg');
+    background-repeat: repeat;
+  
+  }
+
+  pre {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2vh;
+    color: #000000;
+    background-color: rgb(218, 255, 9);
+    width: 30vw;
+    margin: 0;
+  }
+
+  a:hover{
+     background-color: magenta;
+  color: aqua;
+  cursor: url('../cursors/pinkbow.cur'), auto;
+  }
+ 
+  .skewline8 {
+    margin-top: 10rem;
+    transform: rotate(3deg);
+    text-align: left;
+    line-height: 1;
+
+  }
+
+  /* floating Lo links (styled like normal links, just positioned) */
+  .lo-floating {
+    position: fixed;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2vh;
+    background: rgb(242, 255, 0);
+    border: none;
+    padding: 0;
+    text-decoration: underline;
+    z-index: 20;
+  }
+
+.lo-floating:hover{
+  background-color: magenta;
+  color: aqua;
+}
+
+</style>
+</head>
+<body>
+<pre class="skewline8">
+  young girl, he looks at the <a href="#" id="windLink">wind</a>
+</pre>
+
+<script>
+  const windLink = document.getElementById('windLink');
+
+  function randomViewportPosition(edgePct = 6){
+    const top  = edgePct + Math.random() * (100 - edgePct*2);
+    const left = edgePct + Math.random() * (100 - edgePct*2);
+    return { top: top + 'vh', left: left + 'vw' };
+  }
+
+  let spawned = false;
+  function spawnLoCopies(count = 10){
+    for (let i = 0; i < count; i++){
+      const a = document.createElement('a');
+      a.href = './8.html'; // 👈 each Lo links to your page
+      a.textContent = 'Lo';
+      a.className = 'lo-floating';
+      const pos = randomViewportPosition(6);
+      a.style.top  = pos.top;
+      a.style.left = pos.left;
+      document.body.appendChild(a);
+    }
+  }
+
+  windLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (spawned) return;
+    spawned = true;
+    spawnLoCopies(10);
+  });
+</script>
+</body>
+</html>

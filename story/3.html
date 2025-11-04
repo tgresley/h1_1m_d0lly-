@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lolita</title>
+<style>
+  * { box-sizing: border-box; 
+  cursor: url('../cursors/lidseylohanmughsot.cur'), auto;}
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background-image: url('../bgtiles/monkey.jpg');
+    background-repeat: repeat;
+       cursor: url('../cursors/lidseylohanmughsot.cur'), auto;
+  }
+
+  pre {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2vh;
+    color: #000000;
+    background: rgb(246, 255, 124);
+    white-space: pre-wrap;
+    margin: 0;
+    width: 20%;
+  }
+
+  a{
+       color: #0033ff;
+
+  }
+
+  a:hover {
+      cursor: url('../cursors/paprika.cur'), auto;
+
+     color: rgb(255, 255, 255);
+     background-color: rgb(0, 0, 255);
+  }
+
+  /* --- 2000s-style flicker animation --- */
+  .flicker {
+    animation: flicker 1.5s infinite steps(2, end);
+  }
+
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<pre class="reg5 flicker">   Lo wants to be a dancer - she is wearing a very <a href="./4.html">cro</a>
+</pre>
+
+</body>
+</html>
