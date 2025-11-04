@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   /* ===== minimal page ===== */
-  html, body { margin:0; padding:0; background: url('../bgtiles/sky.jpg');  background-size: 50%; }
+  html, body { margin:0; padding:0; background: url('../bgtiles/sky.jpg');  background-size: 40%; }
   body{
     font-family:"Times New Roman", Times, serif;
     font-size:13px;
@@ -32,7 +32,8 @@
   :root{ --size:100px; --gap:6px; }
   .cross{
     
-      background-image: url('../bgtiles/bgfloral5.gif');
+      background-image: url('./angel2.gif');
+
   padding: 10px;
     display:grid;
     grid-template-columns: 1fr auto 1fr; /* center column = vertical arm */
@@ -92,7 +93,8 @@
 }
 
   nav{ margin-top:10px; font-size:12px; }
-  a{ color:#0000ee; text-decoration:underline; }
+  a{ color:#0000ee; text-decoration:underline;    cursor: url('../cursors/rainbowcross.cur'), auto;
+  }
  
 
   /* fake status line */
@@ -279,7 +281,7 @@
   </main>
 
   <nav>
-    <a href="../index.html">again</a> • <a href="#" onclick="alert('For I know that my redeemer liveth, and that he shall stand at the latter day upon the earth 19:25 - KJ'); return false;">confess</a> • <a href="../PAGE_8/index.html" >sleep</a>
+    <a href="../index.html">again</a> • <a href="#" onclick="alert('For I know that my redeemer liveth, and that he shall stand at the latter day upon the earth 19:25 - KJ'); return false;">confess</a> • <a href="../bed/index.html" >sleep</a>
   </nav>
 </div>
 
@@ -358,29 +360,7 @@
     currentSound = sound;
   });
 
-  /* ===== OPTIONAL: HOVER PREVIEW (very short) =====
-     If you prefer a tiny preview on hover, uncomment this block.
-     It won’t loop and will reset when you leave.
-  */
-  /*
-  let hoverSound = null;
-  document.addEventListener('mouseenter', (e) => {
-    const img = e.target.closest('img[data-sound]');
-    if (!img) return;
-    const url = img.getAttribute('data-sound');
-    hoverSound = getSound(url);
-    hoverSound.currentTime = 0;
-    hoverSound.play().catch(()=>{});
-  }, true);
 
-  document.addEventListener('mouseleave', (e) => {
-    if (hoverSound) {
-      hoverSound.pause();
-      hoverSound.currentTime = 0;
-      hoverSound = null;
-    }
-  }, true);
-  */
 </script>
 
 </body>

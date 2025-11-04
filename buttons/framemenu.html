@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiny Random Iframes (Clickable)</title>
+<style>
+  body {
+    margin: 0;
+    background: url('../bgtiles/roses_04.gif') repeat;
+    background-size: auto;
+    font-family: system-ui, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    cursor: url('./ladybug'), auto;
+  }
+
+  .allMenus {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  select {
+    appearance: auto;
+    cursor: url('./weaverant'), auto;
+  }
+
+  .tinyframe {
+    position: absolute;
+    width: 200px;
+    height: 120px;
+    border: 1px solid black;
+    overflow: hidden;
+    background: white;
+    cursor: url('./caterpillar'), auto;
+    z-index: 1000;
+  }
+
+  .tinyframe iframe {
+    width: 1000px;
+    height: 700px;
+    border: none;
+    transform: scale(0.2);
+    transform-origin: top left;
+    pointer-events: none; /* let clicks hit the outer div */
+  }
+</style>
+</head>
+<body>
+
+<div class="allMenus">
+  <select id="mainMenu">
+   
+    <option>wants</option>
+    <option>to</option>
+    <option>call</option>
+    <option>her</option>
+    <option>mother</option>
+  </select>
+
+  <select id="songsMenu">
+
+    <option>She</option>
+    <option>gets</option>
+    <option>on</option>
+    <option>top</option>
+    <option>of</option>
+  </select>
+
+  <select id="catMenu">
+
+    <option>nts</option>
+    <option>tocall</option>
+    <option>her</option>
+    <option>mother.</option>
+  </select>
+
+  <select id="birthdayMenu">
+   
+    <option>ts,</option>
+    <option>she</option>
+    <option>places</option>
+    <option>her</option>
+    <option>head</option>
+  </select>
+</div>
+
+<script>
+const LINKS = [
+  "../type/smiley.html",
+  "../story/4.html",
+  "../story/8.html",
+  "../wind/wind.html",
+  "../buttons/pajamas.html",
+  "../index.html",
+  "../goodbye/endpage.html",
+  "../eyes/index.html",
+  "../cross/cross.html",
+  "../buttons/starting.html",
+  "../buttons/typewriter.html",
+  "../buttons/heyyouthere.html"
+];
+
+function randomLink() {
+  return LINKS[Math.floor(Math.random() * LINKS.length)];
+}
+
+function createTinyIframe(url) {
+  const box = document.createElement("div");
+  box.className = "tinyframe";
+
+  // random position
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  box.style.left = Math.random() * (w - 220) + "px";
+  box.style.top = Math.random() * (h - 150) + "px";
+
+  // iframe preview
+  const iframe = document.createElement("iframe");
+  iframe.src = url;
+  box.appendChild(iframe);
+
+  // click the box → open link in same tab
+  box.addEventListener("click", () => {
+    window.location.href = url;
+  });
+
+  document.body.appendChild(box);
+}
+
+// listener for all menus
+document.querySelectorAll("select").forEach(sel => {
+  sel.addEventListener("change", () => {
+    createTinyIframe(randomLink());
+    sel.selectedIndex = 0;
+  });
+});
+</script>
+
+</body>
+</html>

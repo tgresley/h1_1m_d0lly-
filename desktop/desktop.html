@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lolita — Desktop (folders + p5 + Leopard CD)</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { height:100%; margin:0; }
+  body{
+    width:100vw; height:100vh; overflow:hidden;
+    background-image:url(./background/statue.jpg);
+    background-size:cover; background-position:0 -10vh;
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    cursor: url('/cursors/britner.cur'), auto;
+  }
+
+  /* ===== Layers ===== */
+  .folders{ position:absolute; inset:0; z-index:5; }
+  .desktop-layer{ position:absolute; inset:0; z-index:20; pointer-events:none; }
+
+  /* ===== Folder icons ===== */
+  figure{
+    position:absolute; margin:0; padding:0; width:4%;
+    z-index:15; text-align:center; user-select:none; touch-action:none; cursor:grab;
+  }
+  figure.dragging{ cursor:grabbing; }
+  figure[data-fixed]{ cursor:default; }
+
+  /* Your saved positions */
+  .folder1  { top:56%; left:65%; }
+  .folder2  { top:62%; left:67%; }
+  .folder3  { top:65%; left:56%; }
+  .folder4  { top:62%; left:59%; }
+  .folder5  { top:74%; left:60%; }
+  .folder6  { top:60%; left:25%; }
+  .folder7  { top:83%; left:54%; }
+  .folder8  { top:90%; left:70%; }
+  .folder9  { top:80%; left:45%; }
+  .folder10 { top:1%;  left:74%; }
+  .folder11 { top:35%; left:31%; }
+  .folder12 { top:3%;  right:3%; }    /* CD (fixed) */
+  .folder13 { top:23%; left:83%; }
+  .folder14 { top:13%; right:3%; }     /* Drive (fixed) */
+  .folder15 { top:70%; left:19%; }
+  .folder16 { top:85%; left:32%; }
+  .folder17 { top:2%;  left:43%; }
+  .folder18 { top:72%; left:62%; }
+
+  figure img{
+    display:block; width:100%; height:auto; pointer-events:none;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,.5));
+  }
+
+  /* Captions */
+  figcaption{
+    position:absolute; top:calc(100% + 12px); left:50%; transform:translateX(-50%);
+    font:700 10px/1.25 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    color:#fff; padding:0 6px; border-radius:6px;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 1px 4px rgba(0,0,0,0.25);
+    pointer-events:none;
+    transition: background .15s ease, box-shadow .15s ease;
+  }
+  figure:hover figcaption,
+  figure.dragging figcaption,
+  figure.selected figcaption{
+    background: rgba(0,122,255,0.92);
+    box-shadow: 0 0 10px rgba(0,122,255,0.65), 0 2px 6px rgba(0,0,0,.45);
+  }
+
+  /* ===== Mac window (text) ===== */
+  .txtwin{
+    position:absolute; pointer-events:auto;
+    width:320px; height:200px; border-radius:10px; overflow:hidden;
+    color:#111; background:#f7f7f9; border:1px solid #d6d6dc;
+    box-shadow: 0 12px 28px rgba(0,0,0,.5);
+  }
+  .txtwin.focus{ border-color:#bfc6ff; box-shadow: 0 16px 36px rgba(0,0,0,.6); }
+  .txtbar{
+    height:22px; display:flex; align-items:center; gap:6px; padding:0 8px;
+    background: linear-gradient(#ececf1, #e6e6ec);
+    border-bottom:1px solid #d6d6dc; cursor:move; user-select:none;
+  }
+  .traffic{ display:flex; gap:6px; }
+  .dot{ width:8px; height:8px; border-radius:50%; border:1px solid rgba(0,0,0,.18); cursor: url('../cursors/polkagirl.cur');}
+  .red{ background:#ff5f57; } .yellow{ background:#febc2e; } .green{ background:#28c840; }
+  .txttitle{ margin-left:4px; font:600 11px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial; color:#3a3a45; }
+  .txtcontent{
+    position:absolute; inset:22px 0 0 0; background:#ffffff;
+    padding:8px 10px; overflow:auto;
+    font: 11px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    color:#1a1a1a; white-space:pre-wrap; outline:none;
+  }
+  .resizer{
+    position:absolute; right:5px; bottom:5px; width:10px; height:10px; cursor:nwse-resize; opacity:.6;
+    background:
+      linear-gradient(135deg, transparent 6px, rgba(0,0,0,.18) 6px),
+      linear-gradient(135deg, transparent 8px, rgba(0,0,0,.1) 8px);
+  }
+  .txtwin.min .txtcontent{ display:none; }
+
+  /* ===== Leopard-era brushed-metal CD player (narrow) ===== */
+  .audiowin{
+    position:absolute; pointer-events:auto;
+    width:520px; height:78px; min-width:380px; border-radius:12px; overflow:hidden;
+    color:#0e0e0f; border:1px solid rgba(0,0,0,.35);
+    box-shadow: 0 16px 36px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.35);
+    background:
+      linear-gradient(#cfd5dc,#b9c1c9 18%,#a9b2bb 18%,#aeb7bf 55%,#c1c8cf),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, rgba(255,255,255,0) 2px 4px);
+  }
+  .audiowin .metalbar{
+    height:24px; display:flex; align-items:center; justify-content:space-between; padding:0 10px;
+    background:
+      linear-gradient(#d8dee5,#c9d1d9 55%, #b4bcc4);
+    border-bottom:1px solid rgba(0,0,0,.25);
+    cursor:move; user-select:none;
+  }
+  .audiowin .title{
+    font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial; color:#2c2f34;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  }
+  .audiowin .traffic .dot{ transform:scale(.95); }
+
+  .player{
+    display:flex; align-items:center; gap:10px; padding:8px 12px;
+  }
+  .btn{
+    appearance:none; border:0; width:26px; height:26px; border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,.85), rgba(255,255,255,.2) 60%),
+      linear-gradient(#fefefe,#e5e8eb);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.25), 0 2px 3px rgba(0,0,0,.25);
+    cursor:pointer;
+  }
+  .btn:active{ transform: translateY(1px); }
+  .icon{
+    width:0; height:0; margin:auto;
+    border-style:solid;
+  }
+  .icon.play{ border-width:6px 0 6px 10px; border-color:transparent transparent transparent #2a2f34; }
+  .icon.pause{
+    width:10px; height:10px; background:linear-gradient(#2a2f34,#2a2f34);
+    box-shadow: inset 3px 0 0 #2a2f34, inset -3px 0 0 #2a2f34; border:none;
+  }
+
+  .trackinfo{
+    flex:1; min-width:140px; display:flex; align-items:center; gap:8px;
+    color:#1a1f24; font:500 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial;
+    text-shadow: 0 1px 0 rgba(255,255,255,.6);
+  }
+  .time{ font:600 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono"; opacity:.8; }
+
+  .seekbar{
+    position:relative; flex:1; height:6px; border-radius:999px; cursor:pointer;
+    background: linear-gradient(#d9dee3,#cbd2d9);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.25), 0 1px 0 rgba(255,255,255,.55);
+  }
+  .seekbar .fill{
+    position:absolute; left:0; top:0; bottom:0; width:0%;
+    border-radius:999px;
+    background: linear-gradient(#7fb2ff,#3a7bff);
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.2), 0 0 6px rgba(58,123,255,.55);
+  }
+  .seekbar .knob{
+    position:absolute; top:50%; transform:translate(-50%,-50%);
+    width:12px; height:12px; border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, #fff, #d7dce1 70%);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.4);
+    pointer-events:none;
+  }
+
+  .vol{
+    display:flex; align-items:center; gap:6px; width:120px;
+  }
+  .vol input[type="range"]{
+    width:90px; height:4px; appearance:none; background:transparent;
+  }
+  .vol input[type="range"]::-webkit-slider-runnable-track{
+    height:4px; border-radius:999px; background:linear-gradient(#d9dee3,#cbd2d9);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.25);
+  }
+  .vol input[type="range"]::-webkit-slider-thumb{
+    appearance:none; width:12px; height:12px; border-radius:50%;
+    margin-top:-4px;
+    background: radial-gradient(circle at 30% 30%, #fff, #d7dce1 70%);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.4);
+  }
+
+  /* ===== On-top modal (iframe) ===== */
+  #popupOverlay{
+    position: fixed; inset:0; z-index: 9999; display:none;
+    background: rgba(0,0,0,.45); backdrop-filter: blur(4px);
+  }
+  #popupBox{
+    position: absolute; left:50%; top:50%; transform: translate(-50%,-50%);
+    width: min(90vw, 1024px); height: min(85vh, 700px);
+    background:#0b0b0c; border: 1px solid rgba(255,255,255,.15);
+    border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.6);
+  }
+  #popupBar{
+    height: 30px; display:flex; align-items:center; justify-content:space-between;
+    padding: 0 10px; background: linear-gradient(#2b2e38,#1f2230);
+    color:#e5e7ff; font: 600 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  #popupClose{
+    appearance:none; border:0; background:#ff5f57; color:#000; width:14px; height:14px;
+    border-radius:50%; cursor:pointer; box-shadow: inset 0 0 0 1px rgba(0,0,0,.35);
+  }
+  #popupIframe{ width:100%; height: calc(100% - 30px); border:0; background:#fff; }
+</style>
+</head>
+<body>
+
+<!-- ===== Desktop folders ===== -->
+<div class="folders" id="folders">
+  <figure class="folder1" data-text="Skin touches skin, blending with the sand"
+          data-win-left="6%" data-win-top="8%" data-win-width="360px" data-win-height="220px">
+    <img src="./folders/sexylady.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder2" data-text="ging his pants whilst angrily walking away qwith the washing "
+          data-win-left="62%" data-win-top="10%">
+    <img src="./folders/blueflower.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder3" data-text=" e letters are burnt. His typewriter packed away"
+          data-win-left="24px" data-win-top="280px" data-win-width="300px" data-win-height="180px">
+    <img src="./folders/homer.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder4" data-text=" .packs a suitcase for Lolita, noticing a H+H in a heart on her v"
+          data-win-left="70%" data-win-top="55%">
+    <img src="./folders/Folder-Heart-icon.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder5" data-text=" hen I can’t see yuu" data-win-left="12%" data-win-top="62%">
+    <img src="./folders/pacman.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder6" data-text=" aits and ribbons in her hair" data-win-left="38%" data-win-top="16%">
+    <img src="./folders/sexandthecity2.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder7" data-text=" a shadow behind pri" data-win-left="48%" data-win-top="68%">
+    <img src="./folders/pinklady.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder8" data-text="   She gets on top of him and undoes his striped pajamaes"
+          data-win-left="78%" data-win-top="6%">
+    <img src="./folders/top%20secret.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder9" data-text=" He bovichlv ouivorc" data-win-left="8%" data-win-top="78%">
+    <img src="./folders/yellowflower.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder10" data-text=" I don’t want to leave the congo" data-win-left="72%" data-win-top="2%">
+    <img src="./folders/tulip.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder11" data-text=" e sighs and walks ith her feet and throws things to distract h"
+          data-win-left="32%" data-win-top="36%">
+    <img src="./folders/camera.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+
+  <!-- CD: fixed; will open Leopard CD player -->
+  <figure class="folder12" data-fixed data-win-left="86%" data-win-top="4%"
+          data-audio="../audio/hurt.mp3" data-title="CD — Player">
+    <img src="./folders/CD.png" alt="" draggable="false"><figcaption>CD</figcaption>
+  </figure>
+
+  <figure class="folder13" data-text="  the sparklers—her underwear " data-win-left="64%" data-win-top="44%">
+    <img src="./folders/damask.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+
+  <!-- Drive: fixed; opens p5.html in modal -->
+  <figure class="folder14" data-fixed data-win-left="88%" data-win-top="16%">
+    <img src="./folders/drive.png" alt="" draggable="false"><figcaption>Drive</figcaption>
+  </figure>
+
+  <figure class="folder15" data-text=" She laughs at lolita making a breast joke" data-win-left="18%" data-win-top="70%">
+    <img src="./folders/manf.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder16" data-win-left="54%" data-win-top="22%">
+    <img src="./folders/musicfolder.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+  <figure class="folder17" data-win-left="42%" data-win-top="8%">
+    <img src="./folders/SUNFLOWER.png" alt="" draggable="false"><figcaption>read.mer</figcaption>
+  </figure>
+  <figure class="folder18" data-text=" visible. ROR" data-win-left="60%" data-win-top="72%">
+    <img src="./folders/teddy.png" alt="" draggable="false"><figcaption>read.me</figcaption>
+  </figure>
+</div>
+
+<!-- Windows go here -->
+<div class="desktop-layer" id="desktopLayer"></div>
+
+<!-- ===== On-top modal with iframe (for p5.html) ===== -->
+<div id="popupOverlay" role="dialog" aria-modal="true">
+  <div id="popupBox">
+    <div id="popupBar">
+      <span>p5 — sketch</span>
+      <button id="popupClose" title="Close"></button>
+    </div>
+    <iframe id="popupIframe" src="about:blank"></iframe>
+  </div>
+</div>
+
+<script>
+(() => {
+  const container = document.getElementById('folders');
+  const desktop   = document.getElementById('desktopLayer');
+  const figs      = Array.from(container.querySelectorAll('figure'));
+
+  /* ================= Z-ORDER & FOCUS ================= */
+  let topZ = 100;
+  function focus(win){
+    topZ += 1;
+    win.style.zIndex = topZ;
+    document.querySelectorAll('.txtwin,.audiowin').forEach(w=>w.classList.remove('focus'));
+    win.classList.add('focus');
+  }
+
+  /* ================= GENERIC TEXT WINDOW ================= */
+  function createTextWindow(opts){
+    const { title='Untitled.txt', text='', left, top, width, height } = opts;
+    const W = width  || 320, H = height || 200;
+
+    const win = document.createElement('div');
+    win.className = 'txtwin focus';
+    win.style.width  = (typeof W === 'number' ? W + 'px' : W);
+    win.style.height = (typeof H === 'number' ? H + 'px' : H);
+    win.style.left   = left || `calc(50% - ${(parseInt(W,10)||320)/2}px)`;
+    win.style.top    = top  || '10%';
+    win.style.zIndex = ++topZ;
+
+    win.innerHTML = `
+      <div class="txtbar">
+        <div class="traffic">
+          <div class="dot red" title="Close"></div>
+          <div class="dot yellow" title="Minimise"></div>
+          <div class="dot green" title="Zoom"></div>
+        </div>
+        <div class="txttitle">${title}</div>
+      </div>
+      <div class="txtcontent" contenteditable="true" spellcheck="false"></div>
+      <div class="resizer" title="Resize"></div>
+    `;
+    win.querySelector('.txtcontent').textContent = text;
+
+    // focus
+    win.addEventListener('mousedown', ()=>focus(win));
+
+    // window controls
+    const [red, yellow, green] = win.querySelectorAll('.dot');
+    red.addEventListener('click', ()=> win.remove());
+    yellow.addEventListener('click', ()=> win.classList.toggle('min'));
+    green.addEventListener('click', ()=>{
+      const zoomed = win.dataset.zoomed === '1';
+      if(!zoomed){
+        win.dataset.prevLeft = win.style.left;
+        win.dataset.prevTop  = win.style.top;
+        win.dataset.prevW    = win.style.width;
+        win.dataset.prevH    = win.style.height;
+        win.style.left='5%'; win.style.top='6%'; win.style.width='90%'; win.style.height='84%';
+        win.dataset.zoomed='1';
+      } else {
+        win.style.left = win.dataset.prevLeft;
+        win.style.top  = win.dataset.prevTop;
+        win.style.width= win.dataset.prevW;
+        win.style.height=win.dataset.prevH;
+        win.dataset.zoomed='0';
+      }
+    });
+
+    // drag by bar
+    dragByBar(win, '.txtbar');
+    // resize
+    resizable(win, '.resizer');
+
+    desktop.appendChild(win);
+    focus(win);
+    return win;
+  }
+
+  /* ================= LEOPARD CD PLAYER (NARROW) ================= */
+  function createAudioWindow(opts = {}){
+    const { title = 'CD — Player', src, left, top, width= '520px', height='78px', autoplay=true, loop=false } = opts;
+    if(!src) return;
+
+    const win = document.createElement('div');
+    win.className = 'audiowin focus';
+    win.style.width  = (typeof width  === 'number' ? width  + 'px' : width);
+    win.style.height = (typeof height === 'number' ? height + 'px' : height);
+   win.style.position = 'fixed';   // anchor to viewport
+win.style.right    = 'auto';
+win.style.bottom   = '24px';
+win.style.left     = '24px';
+win.style.top      = 'auto';
+
+    win.style.zIndex = ++topZ;
+
+    win.innerHTML = `
+      <div class="metalbar">
+        <div class="traffic">
+          <span class="dot red"   title="Close"></span>
+          <span class="dot yellow" title="Minimise"></span>
+          <span class="dot green"  title="Zoom"></span>
+        </div>
+        <div class="title">${title}</div>
+      </div>
+      <div class="player">
+        <button class="btn playpause" aria-label="Play/Pause"><span class="icon play"></span></button>
+        <div class="trackinfo">
+          <span class="name">${src.split('/').pop()}</span>
+          <span class="time"><span class="cur">0:00</span> / <span class="dur">0:00</span></span>
+        </div>
+        <div class="seekbar" title="Seek">
+          <div class="fill"></div>
+          <div class="knob" style="left:0%"></div>
+        </div>
+        <div class="vol" title="Volume">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="opacity:.7"><path d="M3 10v4h4l5 5V5L7 10H3z"></path></svg>
+          <input class="volrange" type="range" min="0" max="1" step="0.01" value="0.9"/>
+        </div>
+      </div>
+    `;
+
+    // Hidden native audio
+    const audio = new Audio(src);
+    audio.preload = 'auto';
+    audio.loop = !!loop;
+
+    // Controls
+    const btn   = win.querySelector('.playpause');
+    const icon  = btn.querySelector('.icon');
+    const curT  = win.querySelector('.cur');
+    const durT  = win.querySelector('.dur');
+    const seek  = win.querySelector('.seekbar');
+    const fill  = win.querySelector('.fill');
+    const knob  = win.querySelector('.knob');
+    const vol   = win.querySelector('.volrange');
+
+    // Helpers
+    const fmt = (s)=> {
+      const m = Math.floor(s/60)||0, sec = Math.floor(s%60)||0;
+      return m + ':' + (sec<10?'0':'') + sec;
+    };
+    function updateSeekUI(){
+      const p = (audio.currentTime / (audio.duration||1)) * 100;
+      fill.style.width = p + '%';
+      knob.style.left  = p + '%';
+      curT.textContent = fmt(audio.currentTime||0);
+    }
+
+    // Events
+    audio.addEventListener('loadedmetadata', ()=> { durT.textContent = fmt(audio.duration||0); updateSeekUI(); });
+    audio.addEventListener('timeupdate', updateSeekUI);
+    audio.addEventListener('ended', ()=> { if(!audio.loop){ icon.className='icon play'; } });
+
+    btn.addEventListener('click', ()=>{
+      if (audio.paused){ audio.play().then(()=> icon.className='icon pause').catch(()=>{}); }
+      else { audio.pause(); icon.className='icon play'; }
+    });
+
+    // Seek (click + drag)
+    let seeking = false;
+    function pctFromEvent(e){
+      const r = seek.getBoundingClientRect();
+      const x = (e.touches?e.touches[0].clientX:e.clientX) - r.left;
+      return Math.max(0, Math.min(1, x / r.width));
+    }
+    function seekToPct(p){
+      audio.currentTime = p * (audio.duration||0);
+      updateSeekUI();
+    }
+    seek.addEventListener('mousedown', (e)=>{ seeking=true; seekToPct(pctFromEvent(e)); document.addEventListener('mousemove',dragSeek,{passive:false}); document.addEventListener('mouseup',stopSeek,{passive:false}); });
+    seek.addEventListener('touchstart', (e)=>{ seeking=true; seekToPct(pctFromEvent(e)); document.addEventListener('touchmove',dragSeek,{passive:false}); document.addEventListener('touchend',stopSeek,{passive:false}); });
+    function dragSeek(e){ if(!seeking) return; if(e.cancelable) e.preventDefault(); seekToPct(pctFromEvent(e)); }
+    function stopSeek(){ seeking=false; document.removeEventListener('mousemove',dragSeek); document.removeEventListener('mouseup',stopSeek); document.removeEventListener('touchmove',dragSeek); document.removeEventListener('touchend',stopSeek); }
+
+    // Volume
+    vol.addEventListener('input', ()=> audio.volume = parseFloat(vol.value));
+
+    // window chrome
+    win.addEventListener('mousedown', ()=>focus(win));
+    const [red, yellow, green] = win.querySelectorAll('.traffic .dot');
+    red.addEventListener('click', ()=>{ audio.pause(); win.remove(); });
+    yellow.addEventListener('click', ()=> win.classList.toggle('min')); // (kept for parity; no content hide)
+    green.addEventListener('click', ()=>{
+      const zoomed = win.dataset.zoomed === '1';
+      if(!zoomed){
+        win.dataset.prevLeft = win.style.left;
+        win.dataset.prevTop  = win.style.top;
+        win.dataset.prevW    = win.style.width;
+        win.dataset.prevH    = win.style.height;
+        win.style.left='5%'; win.style.top='4%'; win.style.width='90%'; win.style.height='78px';
+        win.dataset.zoomed='1';
+      } else {
+        win.style.left = win.dataset.prevLeft;
+        win.style.top  = win.dataset.prevTop;
+        win.style.width= win.dataset.prevW;
+        win.style.height=win.dataset.prevH;
+        win.dataset.zoomed='0';
+      }
+    });
+
+    // drag & (horizontal-friendly) resize
+    dragByBar(win, '.metalbar');
+    resizable(win); // keep generic resize (horizontal bar still fine)
+
+    desktop.appendChild(win);
+    focus(win);
+
+    // Autoplay on double-click gesture
+    if (autoplay){
+      audio.play().then(()=> { icon.className='icon pause'; }).catch(()=>{/* ignored if policy blocks */});
+    }
+    return win;
+  }
+
+  /* ================= DRAG/RESIZE HELPERS ================= */
+  function dragByBar(win, selector){
+    const bar = win.querySelector(selector);
+    let sx=0, sy=0, ox=0, oy=0, dragging=false;
+    function down(e){
+      dragging=true; focus(win);
+
+// normalize to fixed + left/top so dragging is predictable
+win.style.position = 'fixed';
+
+
+
+
+      
+      const r = win.getBoundingClientRect(); ox=r.left; oy=r.top;
+      win.style.left   = r.left + 'px';
+win.style.top    = r.top  + 'px';
+win.style.right  = 'auto';
+win.style.bottom = 'auto';
+
+      sx=(e.touches?e.touches[0].clientX:e.clientX);
+      sy=(e.touches?e.touches[0].clientY:e.clientY);
+      window.addEventListener('mousemove',move,{passive:false});
+      window.addEventListener('mouseup',up,{passive:false});
+      window.addEventListener('touchmove',move,{passive:false});
+      window.addEventListener('touchend',up,{passive:false});
+    }
+    function move(e){
+      if(!dragging) return; if(e.cancelable) e.preventDefault();
+      const cx=(e.touches?e.touches[0].clientX:e.clientX);
+      const cy=(e.touches?e.touches[0].clientY:e.clientY);
+      let nx = Math.max(0, Math.min(ox + (cx - sx), window.innerWidth  - win.offsetWidth));
+      let ny = Math.max(0, Math.min(oy + (cy - sy), window.innerHeight - 32));
+      win.style.left = nx + 'px'; win.style.top = ny + 'px';
+    }
+    function up(){
+      dragging=false;
+      window.removeEventListener('mousemove',move);
+      window.removeEventListener('mouseup',up);
+      window.removeEventListener('touchmove',move);
+      window.removeEventListener('touchend',up);
+    }
+    bar.addEventListener('mousedown',down);
+    bar.addEventListener('touchstart',down,{passive:false});
+  }
+
+  function resizable(win, handleSel){
+    const handle = handleSel ? win.querySelector(handleSel) : (()=>{ 
+      const h=document.createElement('div'); h.className='resizer'; win.appendChild(h); return h;
+    })();
+    let sx=0, sy=0, sw=0, sh=0, resizing=false;
+    function down(e){
+      resizing=true; focus(win);
+      const r = win.getBoundingClientRect(); sw=r.width; sh=r.height;
+      sx=(e.touches?e.touches[0].clientX:e.clientX);
+      sy=(e.touches?e.touches[0].clientY:e.clientY);
+      window.addEventListener('mousemove',move,{passive:false});
+      window.addEventListener('mouseup',up,{passive:false});
+      window.addEventListener('touchmove',move,{passive:false});
+      window.addEventListener('touchend',up,{passive:false});
+    }
+    function move(e){
+      if(!resizing) return; if(e.cancelable) e.preventDefault();
+      const cx=(e.touches?e.touches[0].clientX:e.clientX);
+      const cy=(e.touches?e.touches[0].clientY:e.clientY);
+      const nw = Math.min(Math.max(300, sw + (cx - sx)), window.innerWidth - 16);
+      const nh = Math.min(Math.max(60 , sh + (cy - sy)), window.innerHeight - 16);
+      win.style.width  = nw + 'px';
+      win.style.height = nh + 'px';
+    }
+    function up(){
+      resizing=false;
+      window.removeEventListener('mousemove',move);
+      window.removeEventListener('mouseup',up);
+      window.removeEventListener('touchmove',move);
+      window.removeEventListener('touchend',up);
+    }
+    handle.addEventListener('mousedown',down);
+    handle.addEventListener('touchstart',down,{passive:false});
+  }
+
+  /* ================= MODAL HELPERS (p5) ================= */
+  const overlay = document.getElementById('popupOverlay');
+  const iframe  = document.getElementById('popupIframe');
+  const closeBtn= document.getElementById('popupClose');
+
+  function showIframe(url){ iframe.src = url; overlay.style.display = 'block'; }
+  function hideIframe(){ overlay.style.display = 'none'; iframe.src = 'about:blank'; }
+  closeBtn.addEventListener('click', hideIframe);
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) hideIframe(); });
+
+  /* ================= DRAG / SELECT (ONLY NON-FIXED) ================= */
+  let dragging=null, startX=0, startY=0, origLeft=0, origTop=0, moved=false;
+  function pxToPercent(px, total){ return (px/total)*100; }
+
+  function onPointerDown(e){
+    const t = e.currentTarget;
+    if (t.hasAttribute('data-fixed')) return;
+    const rect=t.getBoundingClientRect();
+    const parent=container.getBoundingClientRect();
+    dragging=t; t.classList.add('dragging'); moved=false;
+    const p = (e.touches?e.touches[0]:e);
+    startX=p.clientX; startY=p.clientY;
+    origLeft=rect.left-parent.left; origTop=rect.top-parent.top;
+    window.addEventListener('mousemove',onPointerMove,{passive:false});
+    window.addEventListener('mouseup',onPointerUp,{passive:false});
+    window.addEventListener('touchmove',onPointerMove,{passive:false});
+    window.addEventListener('touchend',onPointerUp,{passive:false});
+  }
+  function onPointerMove(e){
+    if(!dragging) return; if(e.cancelable) e.preventDefault();
+    const parent=container.getBoundingClientRect();
+    const figRect=dragging.getBoundingClientRect();
+    const p = (e.touches?e.touches[0]:e);
+    let newLeft=origLeft+(p.clientX-startX), newTop=origTop+(p.clientY-startY);
+    const maxLeft=parent.width-figRect.width, maxTop=parent.height-figRect.height;
+    if (Math.abs(p.clientX-startX)>3 || Math.abs(p.clientY-startY)>3) moved=true;
+    newLeft=Math.max(0,Math.min(newLeft,maxLeft));
+    newTop=Math.max(0,Math.min(newTop,maxTop));
+    dragging.style.left=pxToPercent(newLeft,parent.width).toFixed(2)+'%';
+    dragging.style.top =pxToPercent(newTop ,parent.height).toFixed(2)+'%';
+    dragging.style.right='auto';
+  }
+  function onPointerUp(){
+    if(!dragging) return;
+    if (!moved) dragging.classList.toggle('selected');
+    dragging.classList.remove('dragging');
+    dragging=null; moved=false;
+    window.removeEventListener('mousemove',onPointerMove);
+    window.removeEventListener('mouseup',onPointerUp);
+    window.removeEventListener('touchmove',onPointerMove);
+    window.removeEventListener('touchend',onPointerUp);
+  }
+
+  figs.filter(f => !f.hasAttribute('data-fixed')).forEach(fig=>{
+    fig.addEventListener('mousedown',onPointerDown);
+    fig.addEventListener('touchstart',onPointerDown,{passive:false});
+  });
+
+  document.addEventListener('mousedown',(e)=>{
+    const isFigure = e.target.closest && e.target.closest('figure');
+    if(!isFigure){ figs.forEach(f=>f.classList.remove('selected')); }
+  });
+
+  /* ================= DOUBLE-CLICK BEHAVIOURS ================= */
+  // Drive → open p5.html in modal
+// Drive → open external or local link
+const drive = document.querySelector('.folder14');
+if (drive) {
+  drive.addEventListener('dblclick', () => {
+    window.open('../index.html', '_self'); // or './yourpage.html'
+  });
+}
+
+
+  // CD → open Leopard CD player (autoplay)
+  const cd = document.querySelector('.folder12');
+  if (cd){
+    cd.addEventListener('dblclick', ()=>{
+      const src   = cd.dataset.audio || '../audio/hurt.mp3';
+      const title = cd.dataset.title || 'CD — Player';
+      createAudioWindow({ src, title, left: cd.dataset.winLeft, top: cd.dataset.winTop, autoplay:true });
+    });
+  }
+
+  // Any other non-fixed folder → text window with its seed text
+  figs.forEach(fig=>{
+    fig.addEventListener('dblclick', ()=>{
+      if (fig.classList.contains('dragging')) return;
+      if (fig.classList.contains('folder14')) return; // handled above
+      if (fig.classList.contains('folder12')) return; // handled above
+      const title = fig.querySelector('figcaption')?.textContent?.trim() || 'Untitled.txt';
+      const seed  = fig.dataset.text || '';
+      createTextWindow({
+        title: title + ' — Text',
+        text: seed,
+        left: fig.dataset.winLeft || null,
+        top: fig.dataset.winTop || null,
+        width: fig.dataset.winWidth || null,
+        height: fig.dataset.winHeight || null
+      });
+    });
+  });
+
+  /* ================= ESC CLOSES TOP WINDOW OR MODAL ================= */
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+      if (overlay.style.display === 'block') hideIframe();
+      else {
+        const focused = [...document.querySelectorAll('.audiowin.focus,.txtwin.focus')].pop();
+        if(focused) focused.remove();
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

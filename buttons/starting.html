@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>see me</title>
+<script>
+let text1 = "   Skin touches skin, blending with the sand  " +  
+	"ging his pants whilst angrily walking away qwith the washing   " + 
+	"e letters are burnt.     ";
+
+let text2 = "He bovichlv ouivorc________________ 	__		____   __" + 
+	"He bovichlv ouivorc________________ 	__		____   __ " + 
+	"He bovichlv ouivorc________________ 	__		____   __     ";
+
+let text3 = "I don’t want to leave the Congo	 " + 
+	"I don’t want to leave the Congo	 " + 
+	"I don’t want to leave the Congo	.    ";
+
+// === Create audio element ===
+let music = new Audio('../audio/bongo.mp3');
+music.loop = true;
+
+function scroll1() {
+	document.forms[0].text1.value = text1;
+	text1 = text1.substring(1) + text1.charAt(0);
+	setTimeout(scroll1, 250);
+}
+
+function scroll2() {
+	document.forms[0].text2.value = text2;
+	text2 = text2.substring(1) + text2.charAt(0);
+	setTimeout(scroll2, 150);
+}
+
+function scroll3() {
+	document.forms[0].text3.value = text3;
+	text3 = text3.substring(1) + text3.charAt(0);
+	setTimeout(scroll3, 200);
+}
+
+// === Function for playing music ===
+function playMusic() {
+  if (music.paused) {
+    music.play();
+  } else {
+    music.pause(); // toggles pause/play if clicked again
+  }
+}
+</script>
+
+<style>
+  *{
+      cursor: url('./ladybug'), auto ;
+  }
+body {
+  background-color: #FF33FF;
+  background-image: url("./photoslidegifs/pond.gif");
+  background-repeat: repeat;
+  font-family: "Arial", sans-serif;
+}
+
+#bar1 { position: absolute; top: 10%; left: 5%; }
+#bar2 { position: absolute; top: 15%; left: 20%; }
+#bar3 { position: absolute; bottom: 10%; right: 5%; }
+
+img {
+  position: absolute;
+  top: 25%;
+  left: 60%;
+  width: 100px;
+  height: 350px;
+}
+
+a { color: white;   cursor: url('./fly'), auto ; }
+
+input {   cursor: url('./ant'), auto ;}
+</style>
+</head>
+
+<body onload="scroll1(); scroll2(); scroll3();">
+<form method="GET" action="./heyyouhere.html">
+  <div id="bar1">
+    <input type="text" name="text1" size="40">
+  </div>
+
+  <!-- scroll bar 2 -->
+<div id="bar2">
+  <input 
+    type="text" 
+    name="text2" 
+    size="20" 
+    onclick="window.location.href='../index.html';"
+  >
+  &nbsp;&nbsp;&nbsp;
+  <input type="submit" value=" hey you here!!!!" name="SUBMIT">
+</div>
+
+
+  <img src="./photoslidegifs/tallteenagegif.gif" alt="beach">
+
+  <!-- Scroll bar 3 (click triggers sound) -->
+  <div id="bar3">
+    <input type="text" name="text3" size="60" onclick="playMusic()">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <font size="-1"><b><a href="./framemenu.html">play</a></b></font>
+  </div>
+</form>
+</body>
+</html>

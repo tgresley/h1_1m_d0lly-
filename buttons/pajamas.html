@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grid-Based Generative Selects + Button</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: url('../backgrioundfull/grave.jpg');
+    background-size: contain;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    cursor: url('./typewriter'), auto;
+  }
+
+  select {
+    cursor: url('../cursors/CF.cur'), auto;
+    font-size: 20px;
+  }
+
+  #finalButton {
+    display: none;
+      cursor: url('../cursors/christianef.cur'), auto;
+   
+  }
+ 
+</style>
+</head>
+<body>
+
+<button id="finalButton" onclick="window.location.href='./typewriter.html'">continue</button>
+
+
+<script>
+// your original words
+const words = [
+  "e","letters","are","burnt.","His","typewriter","packed","away.",
+  "packs","a","suitcase","for","Lolita,","noticing","a","H+H",
+  "in","a","heart","on","her","v","aits","and","ribbons","in",
+  "her","hair","a","shadow","behind","pri"
+];
+
+const song = new Audio('../audio/bowie.mp3'); // ← change to your file
+song.preload = 'auto';
+let songStarted = false;
+function startSongOnce(){
+  if (songStarted) return;
+  songStarted = true;
+  song.currentTime = 0;
+  song.play().catch(()=>{}); // ignore autoplay errors
+}
+
+// grid configuration
+const cellWidth = 30;
+const cellHeight = 50;
+const padding = 50;
+
+const cols = Math.floor(window.innerWidth / (cellWidth + padding));
+const rows = Math.floor(window.innerHeight / (cellHeight + padding));
+const occupied = new Set(); // track used grid cells
+
+function randomWords(count = 5) {
+  return Array.from({length: count}, () => words[Math.floor(Math.random() * words.length)]);
+}
+
+// find next free grid cell
+function nextGridCell() {
+  for (let tries = 0; tries < 200; tries++) {
+    const xIndex = Math.floor(Math.random() * cols);
+    const yIndex = Math.floor(Math.random() * rows);
+    const key = `${xIndex},${yIndex}`;
+    if (!occupied.has(key)) {
+      occupied.add(key);
+      const x = xIndex * (cellWidth + padding);
+      const y = yIndex * (cellHeight + padding);
+      checkIfFull(); // ✅ check after occupying each cell
+      return {x, y};
+    }
+  }
+  // fallback if all full
+  return {x: Math.random() * (window.innerWidth - cellWidth),
+          y: Math.random() * (window.innerHeight - cellHeight)};
+}
+
+function makeSelect() {
+  const sel = document.createElement('select');
+  const pos = nextGridCell();
+  sel.style.left = pos.x + "px";
+  sel.style.top  = pos.y + "px";
+
+  const options = randomWords(Math.floor(Math.random() * 10) + 2);
+  sel.innerHTML = `<option disabled selected>${options[0]}</option>` +
+                  options.slice(1).map(o => `<option>${o}</option>`).join("");
+
+sel.addEventListener('change', startSongOnce, { once: true }); // ← start music
+
+
+  sel.addEventListener('change', () => {
+    const count = Math.floor(Math.random() * 4) + 5; // spawn 10–15 more
+    for (let i = 0; i < count; i++) makeSelect();
+  });
+
+  document.body.appendChild(sel);
+}
+
+// ✅ Check if grid is full and show button
+function checkIfFull() {
+  const totalCells = cols * rows;
+  if (occupied.size >= totalCells) {
+    document.getElementById('finalButton').style.display = 'block';
+  }
+}
+
+// start with one
+makeSelect();
+</script>
+
+</body>
+</html>
